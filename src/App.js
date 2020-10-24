@@ -1,13 +1,27 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
 import LoginPage from './pages/login/login.page';
+import { createStructuredSelector } from "reselect";
+import { selectIsCorrectUser } from './redux/user/user.selector';
+import { connect } from 'react-redux';
+import AdmPage from './pages/adm/adm.page';
+import PrivateRoute from './hoc/private-route';
+import PublicRoute from './hoc/public-route';
 
-function App() {
+
+
+function App({ isCorrectUser }) {
+
+  console.log(isCorrectUser);
   return (
     <div>
-      <Route exact path='/' component={LoginPage}/>
+      <PrivateRoute component={AdmPage} exact path='/' />
+      <PublicRoute component={LoginPage} exact path='/signin'/>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  isCorrectUser: selectIsCorrectUser
+})
+
+export default connect(mapStateToProps)(App);

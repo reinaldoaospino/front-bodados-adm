@@ -1,8 +1,9 @@
 import UserActionTypes from './user.types';
 
 
-export const fechAutenticationStart = () =>({
-    type: UserActionTypes.FETCH_AUTENTICATION_START
+export const fechAutenticationStart = (userData) =>({
+    type: UserActionTypes.FETCH_AUTENTICATION_START,
+    payload: userData
 })
 
 export const fetUserSuccess = (user) =>({
@@ -13,4 +14,8 @@ export const fetUserSuccess = (user) =>({
 export const fetUserFailure = (errorMessage) =>({
     type: UserActionTypes.FETCH_AUTENTICATION_FAILURE,
     payload: errorMessage
+})
+
+export const fetUserDenied = () =>({
+    type: UserActionTypes.FETCH_AUTENTICATION_DENIED,
 })

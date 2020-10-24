@@ -3,7 +3,8 @@ import UserActionTypes from './user.types';
 const INITIAL_STATE = {
     isFetching: false,
     errorMessage: undefined,
-    isCorrectUser: false
+    isCorrectUser: false,
+    accessDenied: false
 }
 
 
@@ -18,7 +19,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isCorrectUser: action.payload,
-                isFetching: false
+                isFetching: false,
+                accessDenied: undefined
             }
         case UserActionTypes.FETCH_AUTENTICATION_FAILURE:
             return {
@@ -26,6 +28,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 isFetching: false,
                 errorMessage: action.payload
             }
+        case UserActionTypes.FETCH_AUTENTICATION_DENIED:
+            return {
+                ...state,
+                isFetching: false,
+                accessDenied: true
+            }
+
         default:
             return state;
     }
