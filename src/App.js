@@ -10,13 +10,14 @@ import ProductsDeletePage from './pages/products/delete/products-delete.page';
 
 function App() {
   return (
-    <AppContainer>
+    <div>
+
       <PrivateRoute component={AdmPage} exact path='/' />
       <PrivateRoute component={ProductsCreatePage} path='/productos/crear' />
       <PrivateRoute component={ProductsUpdatePage} path='/productos/actualizar' />
       <PrivateRoute component={ProductsDeletePage} path='/productos/eliminar' />
       <PublicRoute component={LoginPage} exact path='/signin' />
-    </AppContainer>
+    </div>
   );
 }
 

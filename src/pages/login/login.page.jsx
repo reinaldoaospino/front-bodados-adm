@@ -14,6 +14,7 @@ import { fechAutenticationStart } from "../../redux/user/user.action";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectAuthenticationDenied } from "../../redux/user/user.selector";
+import { AppContainer } from "../../App.styles";
 
 const LoginPage = ({ fetAutenticationStart, autenticationDenied }) => {
   const [userCredentials, setCredentials] = useState({
@@ -35,6 +36,7 @@ const LoginPage = ({ fetAutenticationStart, autenticationDenied }) => {
   };
 
   return (
+    <AppContainer>
       <LoginForm onSubmit={handleSubmit}>
         <LoginWrap>
           <LoginTitleWrap>
@@ -68,6 +70,7 @@ const LoginPage = ({ fetAutenticationStart, autenticationDenied }) => {
           </AccessDeniedMessage>
         </LoginWrap>
       </LoginForm>
+    </AppContainer>
   );
 };
 
