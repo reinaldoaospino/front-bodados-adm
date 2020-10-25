@@ -16,11 +16,4 @@ max-width: max-content;
   max-width: 400px;
 }
 
-@media (max-width: 430px) {
-  max-width: 300px;
-}
-
-@media (max-width: 313px) {
-  max-width: 250px;
-}
 `

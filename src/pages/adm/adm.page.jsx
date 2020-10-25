@@ -6,8 +6,8 @@ import { AdmContainer } from "./adm.styles";
 
 const AdmPage = () => {
   return (
-    <AppContainer>
-      <AdmContainer>
+    <AdmContainer>
+      <AppContainer>
         <ProductMenuComponent
           fontSize="25px"
           color={"white"}
