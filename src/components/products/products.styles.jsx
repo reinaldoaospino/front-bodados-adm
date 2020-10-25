@@ -5,4 +5,6 @@ export const ProducstWrap = styled.div`
   padding: 28px 90px;
   grid-gap: 24px;
   grid-template-columns: repeat(3, 1fr);
+  max-width: 1000px;
+  margin: auto;
 `;

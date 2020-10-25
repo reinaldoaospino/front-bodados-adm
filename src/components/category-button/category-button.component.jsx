@@ -26,7 +26,7 @@ const CategoryButton = () => {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <ListIcon style={{ fontSize: "2em" }} /> Category
+        <ListIcon style={{ fontSize: "2em" }} /> Categorias
       </Button>
       <Menu
         id="simple-menu"
