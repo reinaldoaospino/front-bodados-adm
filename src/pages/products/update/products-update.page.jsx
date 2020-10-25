@@ -6,10 +6,12 @@ import CategoryButton from "../../../components/category-button/category-button.
 import ProductWithSpinner from "../../../components/product-preview/product-with-spinner";
 import { fetchGetProdutcStart } from "../../../redux/product/product.action";
 import { selectProductCollection } from "../../../redux/product/product.selector";
+import Pagination from "@material-ui/lab/Pagination";
 
 import {
   ProductsUpdateContainer,
   ProductsTitle,
+  PaginationWrap,
 } from "./products-update.styles";
 
 const ProductsUpdatePage = ({ productsCollection, fetchGetProdutcStart }) => {
@@ -20,8 +22,11 @@ const ProductsUpdatePage = ({ productsCollection, fetchGetProdutcStart }) => {
   return (
     <ProductsUpdateContainer>
       <ProductsTitle>Administración de Productos</ProductsTitle>
-      <CategoryButton/>
+      <CategoryButton />
       <ProductWithSpinner collection={productsCollection} />
+      <PaginationWrap>
+        <Pagination count={10} variant="outlined" />
+      </PaginationWrap>
     </ProductsUpdateContainer>
   );
 };
