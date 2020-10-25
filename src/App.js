@@ -6,17 +6,16 @@ import { connect } from 'react-redux';
 import AdmPage from './pages/adm/adm.page';
 import PrivateRoute from './hoc/private-route';
 import PublicRoute from './hoc/public-route';
+import { AppContainer } from './App.styles';
 
 
 
 function App({ isCorrectUser }) {
-
-  console.log(isCorrectUser);
   return (
-    <div>
+    <AppContainer>
       <PrivateRoute component={AdmPage} exact path='/' />
       <PublicRoute component={LoginPage} exact path='/signin'/>
-    </div>
+    </AppContainer>
   );
 }
 

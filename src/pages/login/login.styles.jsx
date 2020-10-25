@@ -58,6 +58,9 @@ export const InputWrap = styled.div``;
 
 export const ButtonWrap = styled.div``;
 
+
+export const FeatureProductQuestion= styled.span``
+
 export const AccessDeniedMessage = styled.p`
 text-align: center;
 visibility: ${(props) => (props.isDenied ? "visible" : "hidden")};

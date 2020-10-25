@@ -4,7 +4,6 @@ import {
   ButtonWrap,
   InputWrap,
   LoginForm,
-  LoginPageCotainer,
   LoginTitleWrap,
   LoginWrap,
   Title,
@@ -36,7 +35,6 @@ const LoginPage = ({ fetAutenticationStart, autenticationDenied }) => {
   };
 
   return (
-    <LoginPageCotainer>
       <LoginForm onSubmit={handleSubmit}>
         <LoginWrap>
           <LoginTitleWrap>
@@ -70,7 +68,6 @@ const LoginPage = ({ fetAutenticationStart, autenticationDenied }) => {
           </AccessDeniedMessage>
         </LoginWrap>
       </LoginForm>
-    </LoginPageCotainer>
   );
 };
 
