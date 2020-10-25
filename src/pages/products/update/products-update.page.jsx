@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import CategoryButton from "../../../components/category-button/category-button.component";
 import ProductWithSpinner from "../../../components/product-preview/product-with-spinner";
 import { fetchGetProdutcStart } from "../../../redux/product/product.action";
 import { selectProductCollection } from "../../../redux/product/product.selector";
@@ -19,6 +20,7 @@ const ProductsUpdatePage = ({ productsCollection, fetchGetProdutcStart }) => {
   return (
     <ProductsUpdateContainer>
       <ProductsTitle>Administración de Productos</ProductsTitle>
+      <CategoryButton/>
       <ProductWithSpinner collection={productsCollection} />
     </ProductsUpdateContainer>
   );
