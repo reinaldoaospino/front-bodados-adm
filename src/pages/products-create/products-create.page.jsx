@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CustomInput from "../../components/custom-input/custom-input.component";
-import { CreateContainer, ButtonWrap, InputWrap } from "./create.styles";
+import { CreateContainer, ButtonWrap, InputWrap } from "./products-create.styles";
 import Radio from "@material-ui/core/Radio";
 import {
   FormControl,
@@ -16,7 +16,7 @@ import CustomButton from "../../components/custom-button/custom-button.component
 import { fetchCreateProdutcStart } from "../../redux/product/product.action";
 import { connect } from "react-redux";
 
-const CreatePage = ({ fetchCreateProductStart }) => {
+const ProductsCreatePage = ({ fetchCreateProductStart }) => {
   const [productData, setProductData] = useState({
     productName: "",
     price: "",
@@ -123,4 +123,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchCreateProdutcStart(productData)),
 });
 
-export default connect(null, mapDispatchToProps)(CreatePage);
+export default connect(null, mapDispatchToProps)(ProductsCreatePage);
