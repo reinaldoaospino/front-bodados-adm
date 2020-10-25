@@ -23,3 +23,15 @@ export const CreateProduct = async (productData) => {
 
     return response.status;
 }
+
+export const GetProducts = async()=>{
+    var token = await GetToken();
+
+    const response = await bocadosApi.get('/api/product',{
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+    return response.data;
+}
