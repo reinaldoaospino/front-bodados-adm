@@ -8,15 +8,12 @@ import PrivateRoute from './hoc/private-route';
 import PublicRoute from './hoc/public-route';
 import { AppContainer } from './App.styles';
 import CreatePage from './pages/create/create.pages'
-import { Route } from 'react-router-dom';
-
-
 
 function App({ isCorrectUser }) {
   return (
     <AppContainer>
       <PrivateRoute component={AdmPage} exact path='/' />
-      <PrivateRoute component={CreatePage} path='/create' />
+      <PrivateRoute component={CreatePage} path='/productos/crear' />
       <PublicRoute component={LoginPage} exact path='/signin' />
     </AppContainer>
   );
