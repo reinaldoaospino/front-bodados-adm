@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomInput from "../../components/custom-input/custom-input.component";
+import CustomInput from "../../../components/custom-input/custom-input.component";
 import { CreateContainer, ButtonWrap, InputWrap } from "./products-create.styles";
 import Radio from "@material-ui/core/Radio";
 import {
@@ -10,10 +10,10 @@ import {
   RadioGroup,
   Select,
 } from "@material-ui/core";
-import { FeatureProductQuestion } from "../login/login.styles";
-import CustomFileUpload from "../../components/custom-file-upload/custom-file-upload.component";
-import CustomButton from "../../components/custom-button/custom-button.component";
-import { fetchCreateProdutcStart } from "../../redux/product/product.action";
+import { FeatureProductQuestion } from "../../login/login.styles";
+import CustomFileUpload from "../../../components/custom-file-upload/custom-file-upload.component";
+import CustomButton from "../../../components/custom-button/custom-button.component";
+import { fetchCreateProdutcStart } from "../../../redux/product/product.action";
 import { connect } from "react-redux";
 
 const ProductsCreatePage = ({ fetchCreateProductStart }) => {
