@@ -1,17 +1,13 @@
-import { CircularProgress } from '@material-ui/core';
-import React from 'react'
+import React from "react";
+import SpinnerComponent from "../spinner/spinner.component";
 
-import { SpinnerOverlay } from './with-spinner.styles';
 
-const WithSpinner = WrappedComponent =>({isLoading, ...otherProps})=>{
-    console.log('llego')
-    return isLoading ? (
-        <SpinnerOverlay>
-            <CircularProgress/>
-        </SpinnerOverlay>
-    ) : (
-        <WrappedComponent {...otherProps} />
-    )
-}
+const WithSpinner = (WrappedComponent) => ({ isLoading, ...otherProps }) => {
+  return isLoading ? (
+    <SpinnerComponent />
+  ) : (
+    <WrappedComponent {...otherProps} />
+  );
+};
 
 export default WithSpinner;

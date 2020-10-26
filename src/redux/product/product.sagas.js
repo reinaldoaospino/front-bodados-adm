@@ -6,7 +6,7 @@ import { CreateProduct, GetProducts } from '../../services/product/product-servi
 export function* fetchCreateAsync({ payload }) {
 
     try {
-        yield CreateProduct(payload);
+        yield call(CreateProduct(payload));
         yield fetchCreateProdutcSuccess();
     } catch (error) {
         yield put(fetchCreateProdutcFailure(error))
@@ -33,5 +33,5 @@ export function* fetchGetStart() {
 
 
 export function* productSagas() {
-    yield all([call(fetchCreateStart),call(fetchGetStart)])
+    yield all([call(fetchCreateStart), call(fetchGetStart)])
 }
