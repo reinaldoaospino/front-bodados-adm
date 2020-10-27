@@ -2,9 +2,11 @@ import ProductActionTypes from './product.types';
 
 
 const INITIAL_STATE = {
-    isFetching: true,
+    isFetching: false,
     errorMessage: undefined,
-    productsCollection: undefined
+    productsCollection: undefined,
+    actionSucess: false,
+    actionFailure: false
 }
 
 const ProductReducer = (state = INITIAL_STATE, action) => {
@@ -17,13 +19,15 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
         case ProductActionTypes.FETCH_CREATE_PRODUCTS_SUCCESS:
             return {
                 ...state,
-                isFetching: false
+                isFetching: false,
+                actionSucess: true
             }
         case ProductActionTypes.FETCH_CREATE_PRODUCTS_FAILURE:
             return {
                 ...state,
                 isFetching: false,
-                errorMessage: action.payload
+                errorMessage: action.payload,
+                actionFailure: true
             }
 
         case ProductActionTypes.FETCH_GET_PRODUCTS_START:
@@ -42,6 +46,11 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 isFetching: false,
                 errorMessage: action.payload
+            }
+        case ProductActionTypes.SET_ACTION_SUCCESS:
+            return{
+                ...state,
+                actionSucess: action.payload
             }
 
         default:

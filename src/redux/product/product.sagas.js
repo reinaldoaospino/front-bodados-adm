@@ -6,8 +6,8 @@ import { CreateProduct, GetProducts } from '../../services/product/product-servi
 export function* fetchCreateAsync({ payload }) {
 
     try {
-        yield call(CreateProduct(payload));
-        yield fetchCreateProdutcSuccess();
+        yield CreateProduct(payload);
+        yield put(fetchCreateProdutcSuccess());
     } catch (error) {
         yield put(fetchCreateProdutcFailure(error))
     }

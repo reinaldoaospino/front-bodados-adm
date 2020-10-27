@@ -28,3 +28,8 @@ export const fetchGetProdutcFailure = (errorMessage) => ({
     type: ProductActionType.FETCH_GET_PRODUCTS_FAILURE,
     payload: errorMessage
 })
+
+export const setActionSuccess = (stateAction) => ({
+    type: ProductActionType.SET_ACTION_SUCCESS,
+    payload: stateAction
+})
