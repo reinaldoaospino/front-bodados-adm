@@ -36,18 +36,17 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
         case ProductActionTypes.FETCH_GET_PRODUCTS_START:
             return {
                 ...state,
-                isFetching: true
             }
         case ProductActionTypes.FETCH_GET_PRODUCTS_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
+                isFetching: true,
                 productsCollection: action.payload
             }
         case ProductActionTypes.FETCH_GET_PRODUCTS_FAILURE:
             return {
                 ...state,
-                isFetching: false,
+                isFetching: true,
                 errorMessage: action.payload
             }
         case ProductActionTypes.SET_ACTION_SUCCESS:

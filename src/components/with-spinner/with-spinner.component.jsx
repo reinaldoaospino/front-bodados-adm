@@ -3,7 +3,7 @@ import SpinnerComponent from "../spinner/spinner.component";
 
 
 const WithSpinner = (WrappedComponent) => ({ isLoading, ...otherProps }) => {
-  return isLoading ? (
+  return !isLoading ? (
     <SpinnerComponent />
   ) : (
     <WrappedComponent {...otherProps} />
