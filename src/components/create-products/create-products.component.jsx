@@ -6,6 +6,7 @@ import {
   InputWrap,
   ButtonWrap,
 } from "./create-products.styles";
+
 import {
   FormControl,
   FormControlLabel,
@@ -14,15 +15,43 @@ import {
   RadioGroup,
   Select,
   Radio,
+  CircularProgress,
 } from "@material-ui/core";
+
 import { useState } from "react";
 import CustomInput from "../custom-input/custom-input.component";
 import CustomFileUpload from "../custom-file-upload/custom-file-upload.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { connect } from "react-redux";
-import { fetchCreateProdutcStart } from "../../redux/product/product.action";
 
-const CreateProductsComponent = ({ fetchCreateProductStart }) => {
+import {
+  fetchCreateProdutcStart,
+  setActionComplete,
+  setActionFailure,
+  setActionSuccess,
+} from "../../redux/product/product.action";
+
+import { createStructuredSelector } from "reselect";
+
+import {
+  selectActionComplete,
+  selectActionFailure,
+  selectActionSucess,
+  selectIsFetching,
+} from "../../redux/product/product.selector";
+
+const CreateProductsComponent = (props) => {
+  
+  //Declarations
+  const {
+    fetchCreateProductStart,
+    isFetching,
+    actionSuccess,
+    actionComplete,
+    setActionComplete,
+    setActionSuccess,
+  } = props;
+
   const [productData, setProductData] = useState({
     productName: "",
     price: "",
@@ -33,11 +62,12 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
 
   const { productName, price, category } = productData;
 
+  const disabled = isFetching;
+
+  //Funtions
   const handleSubmit = (event) => {
     event.preventDefault();
-
     fetchCreateProductStart(productData);
-
   };
 
   const handleCHange = (event) => {
@@ -45,9 +75,18 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
     setProductData({ ...productData, [name]: value });
   };
 
-  // const handleCloseDialog = () => {
-  //   setOpenDialog(false);
-  // };
+  const handleCloseDialog = () => {
+    setActionSuccess(false);
+    setActionComplete(false);
+    setProductData({
+      productName: "",
+      price: "",
+      featuredProduct: "",
+      category: "",
+      imgFile: "",
+    });
+    document.getElementById("form-create").reset();
+  };
 
   const loadFile = (e) => {
     e.preventDefault();
@@ -61,9 +100,23 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
       setProductData({ ...productData, imgFile: base64Img });
     };
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit} id="form-create">
+        {actionSuccess ? (
+          <DialogMessageComponent
+            open={actionComplete}
+            text="Producto Creado Correctamente"
+            handleCloseDialog={handleCloseDialog}
+          />
+        ) : (
+          <DialogMessageComponent
+            open={actionComplete}
+            text="Fallo la carga de productos"
+            handleCloseDialog={handleCloseDialog}
+          />
+        )}
         <CreateContainer>
           <InputWrap>
             <CustomInput
@@ -71,8 +124,9 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
               value={productName}
               text="Nombre"
               required={true}
-              handleChange={handleCHange}
+              onChange={handleCHange}
               id={"productName"}
+              disabled={disabled}
             />
           </InputWrap>
           <InputWrap>
@@ -81,8 +135,10 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
               value={price}
               text="Precio"
               required={true}
-              handleChange={handleCHange}
+              onChange={handleCHange}
               id={"price"}
+              disabled={disabled}
+              type={"number"}
             />
           </InputWrap>
           <InputWrap>
@@ -102,6 +158,7 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
                 labelPlacement="start"
                 name={"featuredProduct"}
                 onChange={handleCHange}
+                disabled={disabled}
               />
               <FormControlLabel
                 value={"false"}
@@ -110,6 +167,7 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
                 labelPlacement="start"
                 name={"featuredProduct"}
                 onChange={handleCHange}
+                disabled={disabled}
               />
             </RadioGroup>
           </InputWrap>
@@ -121,6 +179,7 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
                 name={"category"}
                 required={true}
                 value={category}
+                disabled={disabled}
               >
                 <MenuItem value={"Dessert"}>Dessert</MenuItem>
                 <MenuItem value={"Cookies"}>Cookies</MenuItem>
@@ -130,10 +189,11 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
           </InputWrap>
           <InputWrap>
             <p>Selecione imagen</p>
-            <CustomFileUpload loadFile={loadFile} />
+            <CustomFileUpload loadFile={loadFile} disabled={disabled} />
           </InputWrap>
           <ButtonWrap>
-            <CustomButton text={"Aceptar"} />
+            <CustomButton text={"Aceptar"} disabled={disabled} />
+            {isFetching ? <CircularProgress /> : null}
           </ButtonWrap>
         </CreateContainer>
       </form>
@@ -141,9 +201,22 @@ const CreateProductsComponent = ({ fetchCreateProductStart }) => {
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  isFetching: selectIsFetching,
+  actionSuccess: selectActionSucess,
+  actionFailure: selectActionFailure,
+  actionComplete: selectActionComplete,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   fetchCreateProductStart: (productData) =>
     dispatch(fetchCreateProdutcStart(productData)),
+  setActionSuccess: (value) => dispatch(setActionSuccess(value)),
+  setActionFailure: (value) => dispatch(setActionFailure(value)),
+  setActionComplete: (value) => dispatch(setActionComplete(value)),
 });
 
-export default connect(null, mapDispatchToProps)(CreateProductsComponent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateProductsComponent);

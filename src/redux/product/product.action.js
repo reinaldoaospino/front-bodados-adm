@@ -33,3 +33,13 @@ export const setActionSuccess = (stateAction) => ({
     type: ProductActionType.SET_ACTION_SUCCESS,
     payload: stateAction
 })
+
+export const setActionFailure = (stateAction) => ({
+    type: ProductActionType.SET_ACTION_FAILURE,
+    payload: stateAction
+})
+
+export const setActionComplete = (stateAction) => ({
+    type: ProductActionType.SET_ACTION_COMPLETE,
+    payload: stateAction
+})

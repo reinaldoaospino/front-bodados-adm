@@ -13,3 +13,20 @@ export const selectIsFetching = createSelector(
     [selectProduct],
     product => product.isFetching
 )
+
+export const selectActionSucess = createSelector(
+    [selectProduct],
+    product => product.actionSucess
+)
+
+
+export const selectActionFailure = createSelector(
+    [selectProduct],
+    product => product.actionFailure
+)
+
+export const selectActionComplete = createSelector(
+    [selectProduct],
+    product => product.actionComplete
+)
+

@@ -5,8 +5,9 @@ const INITIAL_STATE = {
     isFetching: false,
     errorMessage: undefined,
     productsCollection: undefined,
+    actionComplete: false,
     actionSucess: false,
-    actionFailure: false
+    actionFailure: false,
 }
 
 const ProductReducer = (state = INITIAL_STATE, action) => {
@@ -20,14 +21,16 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                actionSucess: true
+                actionSucess: true,
+                actionComplete: true,
             }
         case ProductActionTypes.FETCH_CREATE_PRODUCTS_FAILURE:
             return {
                 ...state,
                 isFetching: false,
                 errorMessage: action.payload,
-                actionFailure: true
+                actionFailure: true,
+                actionComplete: true,
             }
 
         case ProductActionTypes.FETCH_GET_PRODUCTS_START:
@@ -48,9 +51,21 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
                 errorMessage: action.payload
             }
         case ProductActionTypes.SET_ACTION_SUCCESS:
-            return{
+            return {
                 ...state,
-                actionSucess: action.payload
+                actionSucess: action.payload,
+                clearCreateForm: action.payload
+            }
+        case ProductActionTypes.SET_ACTION_FAILURE:
+            return {
+                ...state,
+                actionFailure: action.payload
+            }
+
+        case ProductActionTypes.SET_ACTION_COMPLETE:
+            return {
+                ...state,
+                actionComplete: action.payload
             }
 
         default:

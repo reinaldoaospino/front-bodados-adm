@@ -1,11 +1,11 @@
 import React from "react";
 import { AppContainer } from "../../../App.styles";
-import ProductCreateWithSpinner from "../../../components/create-products/create-products-with-spinner";
+import CreateProductsComponent from "../../../components/create-products/create-products.component";
 
 const ProductsCreatePage = () => {
   return (
     <AppContainer>
-      <ProductCreateWithSpinner />
+      <CreateProductsComponent />
     </AppContainer>
   );
 };

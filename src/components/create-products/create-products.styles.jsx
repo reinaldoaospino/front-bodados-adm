@@ -6,7 +6,10 @@ export const CreateContainer = styled.div`
   grid-gap: 24px;
 `;
 
-
 export const InputWrap = styled.div``;
 
-export const ButtonWrap = styled.div``;
+export const ButtonWrap = styled.div`
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-gap: 20px;
+`;
