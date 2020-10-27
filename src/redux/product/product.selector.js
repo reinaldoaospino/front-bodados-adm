@@ -30,3 +30,10 @@ export const selectActionComplete = createSelector(
     product => product.actionComplete
 )
 
+
+export const selectIsCreating = createSelector(
+    [selectProduct],
+    product => product.isCreating
+)
+
+

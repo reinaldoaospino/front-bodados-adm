@@ -37,6 +37,7 @@ import {
   selectActionComplete,
   selectActionFailure,
   selectActionSucess,
+  selectIsCreating,
   selectIsFetching,
 } from "../../redux/product/product.selector";
 
@@ -45,7 +46,7 @@ const CreateProductsComponent = (props) => {
   //Declarations
   const {
     fetchCreateProductStart,
-    isFetching,
+    isCreating,
     actionSuccess,
     actionComplete,
     setActionComplete,
@@ -62,7 +63,7 @@ const CreateProductsComponent = (props) => {
 
   const { productName, price, category } = productData;
 
-  const disabled = isFetching;
+  const disabled = isCreating;
 
   //Funtions
   const handleSubmit = (event) => {
@@ -193,7 +194,7 @@ const CreateProductsComponent = (props) => {
           </InputWrap>
           <ButtonWrap>
             <CustomButton text={"Aceptar"} disabled={disabled} />
-            {isFetching ? <CircularProgress /> : null}
+            {isCreating ? <CircularProgress /> : null}
           </ButtonWrap>
         </CreateContainer>
       </form>
@@ -202,7 +203,7 @@ const CreateProductsComponent = (props) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  isFetching: selectIsFetching,
+  isCreating: selectIsCreating,
   actionSuccess: selectActionSucess,
   actionFailure: selectActionFailure,
   actionComplete: selectActionComplete,

@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     actionComplete: false,
     actionSucess: false,
     actionFailure: false,
+    isCreating: false,
 }
 
 const ProductReducer = (state = INITIAL_STATE, action) => {
@@ -15,19 +16,19 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
         case ProductActionTypes.FETCH_CREATE_PRODUCTS_START:
             return {
                 ...state,
-                isFetching: true
+                isCreating: true
             }
         case ProductActionTypes.FETCH_CREATE_PRODUCTS_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
+                isCreating: false,
                 actionSucess: true,
                 actionComplete: true,
             }
         case ProductActionTypes.FETCH_CREATE_PRODUCTS_FAILURE:
             return {
                 ...state,
-                isFetching: false,
+                isCreating: false,
                 errorMessage: action.payload,
                 actionFailure: true,
                 actionComplete: true,

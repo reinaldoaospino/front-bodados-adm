@@ -2,7 +2,7 @@ import React from "react";
 import SpinnerComponent from "../spinner/spinner.component";
 
 
-const WithSpinner = (WrappedComponent) => ({ isLoading, ...otherProps }) => {
+const WithSpinnerGet = (WrappedComponent) => ({ isLoading, ...otherProps }) => {
   return !isLoading ? (
     <SpinnerComponent />
   ) : (
@@ -10,4 +10,4 @@ const WithSpinner = (WrappedComponent) => ({ isLoading, ...otherProps }) => {
   );
 };
 
-export default WithSpinner;
+export default WithSpinnerGet;
