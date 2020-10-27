@@ -38,7 +38,6 @@ import {
   selectActionFailure,
   selectActionSucess,
   selectIsCreating,
-  selectIsFetching,
 } from "../../redux/product/product.selector";
 
 const CreateProductsComponent = (props) => {
