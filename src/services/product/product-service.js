@@ -48,7 +48,7 @@ export const UpdateProducts = async (productData) => {
 
     var token = await tokenTask;
 
-    const response = await bocadosApi.post('/api/product', data, {
+    const response = await bocadosApi.put('/api/product', data, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -62,7 +62,7 @@ export const DeleteProduct = async (id) => {
 
     var token = await tokenTask;
 
-    const response = await bocadosApi.post('/api/product/' + id, data, {
+    const response = await bocadosApi.delete(`/api/product/${id}`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }

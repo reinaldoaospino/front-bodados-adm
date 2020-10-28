@@ -67,12 +67,14 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isUpdating: false,
+                actionComplete: true,
             }
         case ProductActionTypes.FETCH_UPDATE_PRODUCTS_FAILURE:
             return {
                 ...state,
                 errorMessage: action.payload,
                 isUpdating: false,
+                actionComplete: true,
             }
 
         //DELETE
@@ -86,12 +88,16 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isDeleting: false,
+                actionSucess: true,
+                actionComplete: true,
             }
-        case ProductActionTypes.FETCH_UPDATE_PRODUCTS_FAILURE:
+        case ProductActionTypes.FETCH_DELETE_PRODUCTS_FAILURE:
             return {
                 ...state,
                 errorMessage: action.payload,
                 isDeleting: false,
+                actionSucess: false,
+                actionComplete: true,
             }
 
 

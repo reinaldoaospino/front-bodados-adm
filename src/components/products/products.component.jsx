@@ -6,7 +6,7 @@ const ProductsComponent = ({ collection }) => {
   return (
     <ProducstWrap>
       {collection.map((p) => (
-        <ProducsPreviewComponent item={p} />
+        <ProducsPreviewComponent key={p.id} item={p} />
       ))}
     </ProducstWrap>
   );

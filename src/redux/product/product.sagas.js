@@ -1,6 +1,6 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import ProductActionTypes from './product.types';
-import { fetchCreateProdutcSuccess, fetchCreateProdutcFailure, fetchGetProdutcSuccess, fetchUpdateProdutcSuccess, fetchUpdateProdutcFailure, fetchDeleteProdutcSuccess, fetchDeleteProdutcFailure } from './product.action'
+import { fetchCreateProdutcSuccess, fetchCreateProdutcFailure, fetchGetProdutcSuccess, fetchUpdateProdutcSuccess, fetchUpdateProdutcFailure, fetchDeleteProdutcSuccess, fetchDeleteProdutcFailure, fetchGetProdutcFailure } from './product.action'
 import { CreateProduct, GetProducts, UpdateProducts, DeleteProduct } from '../../services/product/product-service';
 
 export function* fetchCreateAsync({ payload }) {
@@ -19,7 +19,7 @@ export function* fetchGetAsync() {
         var collection = yield GetProducts();
         yield put(fetchGetProdutcSuccess(collection));
     } catch (error) {
-        yield put(fetchCreateProdutcFailure(error))
+        yield put(fetchGetProdutcFailure(error))
     }
 }
 
@@ -39,6 +39,7 @@ export function* fetchDeleteAsync({ payload }) {
     try {
         yield DeleteProduct(payload);
         yield put(fetchDeleteProdutcSuccess());
+        window.location.reload();
     } catch (error) {
         yield put(fetchDeleteProdutcFailure(error))
     }

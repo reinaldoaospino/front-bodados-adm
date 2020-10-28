@@ -50,11 +50,9 @@ export const fetchUpdateProdutcFailure = (errorMessage) => ({
 })
 
 //DELETE
-
-
-export const fetchDeleteProdutcStart = (productData) => ({
+export const fetchDeleteProductStart = (id) => ({
     type: ProductActionType.FETCH_DELETE_PRODUCTS_START,
-    payload: productData
+    payload: id
 })
 
 export const fetchDeleteProdutcSuccess = () => ({

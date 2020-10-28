@@ -7,7 +7,8 @@ const ProducsPreviewComponent = ({ item }) => {
     <ProductPrevieWrap>
       <ProductCard
         urlImage={"data:image/png;base64," + item.imagen}
-        ProducName={item.productName}
+        ProductName={item.productName}
+        id={item.id}
       />
     </ProductPrevieWrap>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ProductImageWrap,
   ImageWrap,
@@ -6,34 +6,78 @@ import {
   Price,
   Description,
   PriceWrap,
-  ProductImg,OptionsWrap,ShopOptionWrap
+  ProductImg,
+  OptionsWrap,
+  ShopOptionWrap,
 } from "./product-card.styles";
 import CustomButton from "../custom-button/custom-button.component";
+import Zoom from "react-reveal/Zoom";
+import DialogMessageDeleteComponent from "../dialog-message-delete/dialog-message-delete.component";
+import { fetchDeleteProductStart } from "../../redux/product/product.action";
+import { connect } from "react-redux";
+import { selectActionSucess } from "../../redux/product/product.selector";
+import { createStructuredSelector } from "reselect";
 
-import Zoom from 'react-reveal/Zoom';
+const ProductCard = (props) => {
+  const {
+    id,
+    urlImage,
+    ProductName,
+    fetchDeleteProductStart,
+  } = props;
 
-const ProductCard = ({ urlImage, ProducName }) => (
-  <Zoom>
-    <ProductImageWrap>
-      <ImageWrap>
-        <ProductImg src={urlImage} />
-      </ImageWrap>
-      <DescriptionWrap>
-        <Description>{ProducName}</Description>
-      </DescriptionWrap>
-      <PriceWrap>
-        <Price>$ 100</Price>
-      </PriceWrap>
-      <OptionsWrap>
-        <ShopOptionWrap>
-          <CustomButton text='editar'  />
-        </ShopOptionWrap>
-        <ShopOptionWrap>
-          <CustomButton text='Eliminar' background={"rgb(197, 219, 116)"}  />
-        </ShopOptionWrap>
-      </OptionsWrap>
-    </ProductImageWrap>
-  </Zoom>
-);
+  const [openDialog, setOpenDialog] = useState(false);
 
-export default ProductCard;
+  const handleClose = () => {
+    setOpenDialog(false);
+  };
+
+  const handleYesOption = () => {
+    fetchDeleteProductStart(id);
+  };
+
+  return (
+    <div>
+      <DialogMessageDeleteComponent
+        open={openDialog}
+        text={`¿Deseas eliminar el producto ${ProductName}`}
+        handleYes={handleYesOption}
+        handleCloseDialog={handleClose}
+      />
+      <Zoom>
+        <ProductImageWrap>
+          <ImageWrap>
+            <ProductImg src={urlImage} />
+          </ImageWrap>
+          <DescriptionWrap>
+            <Description>{ProductName}</Description>
+          </DescriptionWrap>
+          <PriceWrap>
+            <Price>$ 100</Price>
+          </PriceWrap>
+          <OptionsWrap>
+            <ShopOptionWrap>
+              <CustomButton text="editar" />
+            </ShopOptionWrap>
+            <ShopOptionWrap>
+              <CustomButton
+                text="Eliminar"
+                onClick={() => setOpenDialog(true)}
+                background={"rgb(197, 219, 116)"}
+              />
+            </ShopOptionWrap>
+          </OptionsWrap>
+        </ProductImageWrap>
+      </Zoom>
+    </div>
+  );
+};
+
+const mapStateToProps = createStructuredSelector({
+  actionSuccess: selectActionSucess,
+});
+const mapDispatchToProps = (dispatch) => ({
+  fetchDeleteProductStart: (id) => dispatch(fetchDeleteProductStart(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

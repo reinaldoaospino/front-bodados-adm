@@ -11,7 +11,6 @@ box-shadow: 0px 10px 5px 10px rgba(242, 242, 242, 1);
 border: 1px solid;
 border-radius: 20px;
 width: 517px;
-height: 654px;
 max-width: max-content;
 
 @media (max-width: 600px) {

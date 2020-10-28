@@ -41,7 +41,7 @@ export const selectIsUpdating = createSelector(
     product => product.isUpdating
 )
 
-export const selectIsUpdating = createSelector(
+export const selectIsDeleting = createSelector(
     [selectProduct],
     product => product.isDeleting
 )
