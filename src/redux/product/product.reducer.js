@@ -9,10 +9,14 @@ const INITIAL_STATE = {
     actionSucess: false,
     actionFailure: false,
     isCreating: false,
+    isUpdating: false,
+    isDeleting: false
 }
 
 const ProductReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
+
+        //CREATE
         case ProductActionTypes.FETCH_CREATE_PRODUCTS_START:
             return {
                 ...state,
@@ -34,6 +38,7 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
                 actionComplete: true,
             }
 
+        //GET
         case ProductActionTypes.FETCH_GET_PRODUCTS_START:
             return {
                 ...state,
@@ -50,6 +55,47 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
                 isFetching: true,
                 errorMessage: action.payload
             }
+
+        //UPDATE
+
+        case ProductActionTypes.FETCH_UPDATE_PRODUCTS_START:
+            return {
+                ...state,
+                isUpdating: true
+            }
+        case ProductActionTypes.FETCH_UPDATE_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                isUpdating: false,
+            }
+        case ProductActionTypes.FETCH_UPDATE_PRODUCTS_FAILURE:
+            return {
+                ...state,
+                errorMessage: action.payload,
+                isUpdating: false,
+            }
+
+        //DELETE
+
+        case ProductActionTypes.FETCH_DELETE_PRODUCTS_START:
+            return {
+                ...state,
+                isDeleting: true
+            }
+        case ProductActionTypes.FETCH_DELETE_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                isDeleting: false,
+            }
+        case ProductActionTypes.FETCH_UPDATE_PRODUCTS_FAILURE:
+            return {
+                ...state,
+                errorMessage: action.payload,
+                isDeleting: false,
+            }
+
+
+        //OTHERS
         case ProductActionTypes.SET_ACTION_SUCCESS:
             return {
                 ...state,
