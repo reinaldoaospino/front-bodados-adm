@@ -13,7 +13,7 @@ import {
 import CustomButton from "../custom-button/custom-button.component";
 import Zoom from "react-reveal/Zoom";
 import DialogMessageDeleteComponent from "../dialog-message-delete/dialog-message-delete.component";
-import { fetchDeleteProductStart } from "../../redux/product/product.action";
+import { fetchDeleteProductStart, setActionComplete } from "../../redux/product/product.action";
 import { connect } from "react-redux";
 import { selectActionSucess } from "../../redux/product/product.selector";
 import { createStructuredSelector } from "reselect";
@@ -24,12 +24,14 @@ const ProductCard = (props) => {
     urlImage,
     ProductName,
     fetchDeleteProductStart,
+    setActionComplete
   } = props;
 
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleClose = () => {
     setOpenDialog(false);
+    setActionComplete(false);
   };
 
   const handleYesOption = () => {
@@ -78,6 +80,7 @@ const mapStateToProps = createStructuredSelector({
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchDeleteProductStart: (id) => dispatch(fetchDeleteProductStart(id)),
+  setActionComplete: (value) => dispatch(setActionComplete(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
