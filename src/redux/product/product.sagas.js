@@ -1,7 +1,7 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import ProductActionTypes from './product.types';
-import { fetchCreateProdutcSuccess, fetchCreateProdutcFailure, fetchGetProdutcSuccess } from './product.action'
-import { CreateProduct, GetProducts } from '../../services/product/product-service';
+import { fetchCreateProdutcSuccess, fetchCreateProdutcFailure, fetchGetProdutcSuccess, fetchUpdateProdutcSuccess, fetchUpdateProdutcFailure, fetchDeleteProdutcSuccess, fetchDeleteProdutcFailure } from './product.action'
+import { CreateProduct, GetProducts, UpdateProducts, DeleteProduct } from '../../services/product/product-service';
 
 export function* fetchCreateAsync({ payload }) {
 
@@ -23,6 +23,27 @@ export function* fetchGetAsync() {
     }
 }
 
+export function* fetchUpdateAsync({ payload }) {
+
+    try {
+        yield UpdateProducts(payload);
+        yield put(fetchUpdateProdutcSuccess());
+    } catch (error) {
+        yield put(fetchUpdateProdutcFailure(error))
+    }
+}
+
+
+export function* fetchDeleteAsync({ payload }) {
+
+    try {
+        yield DeleteProduct(payload);
+        yield put(fetchDeleteProdutcSuccess());
+    } catch (error) {
+        yield put(fetchDeleteProdutcFailure(error))
+    }
+}
+
 export function* fetchCreateStart() {
     yield takeLatest(ProductActionTypes.FETCH_CREATE_PRODUCTS_START, fetchCreateAsync)
 }
@@ -31,7 +52,16 @@ export function* fetchGetStart() {
     yield takeLatest(ProductActionTypes.FETCH_GET_PRODUCTS_START, fetchGetAsync)
 }
 
+export function* fetchUpdateStart() {
+    yield takeLatest(ProductActionTypes.FETCH_UPDATE_PRODUCTS_START, fetchUpdateAsync)
+}
+
+export function* fetchDeleteStart() {
+    yield takeLatest(ProductActionTypes.FETCH_DELETE_PRODUCTS_START, fetchDeleteAsync)
+}
+
+
 
 export function* productSagas() {
-    yield all([call(fetchCreateStart), call(fetchGetStart)])
+    yield all([call(fetchCreateStart), call(fetchGetStart), call(fetchUpdateStart), call(fetchDeleteStart)])
 }
