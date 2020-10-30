@@ -8,3 +8,11 @@ export const ProducstWrap = styled.div`
   max-width: 1000px;
   margin: auto;
 `;
+
+export const PaginationWrap = styled.div`
+margin: auto;
+    display: flex;
+    outline: 0;
+    position: relative;
+    justify-content: center;
+`

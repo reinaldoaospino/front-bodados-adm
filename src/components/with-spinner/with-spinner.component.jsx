@@ -1,12 +1,25 @@
 import React from "react";
 import SpinnerComponent from "../spinner/spinner.component";
+import ErorrMessageComponent from "../error-message/error-message.component";
 
-
-const WithSpinnerGet = (WrappedComponent) => ({ isLoading, ...otherProps }) => {
-  return !isLoading ? (
+const WithSpinnerGet = (WrappedComponent) => ({
+  isLoading,
+  actionFailure,
+  ...otherProps
+}) => {
+  const WithError = WithErrorMessage(WrappedComponent);
+  return isLoading ? (
     <SpinnerComponent />
   ) : (
-    <WrappedComponent {...otherProps} />
+    <WithError error={actionFailure} {...otherProps} />
+  );
+};
+ 
+const WithErrorMessage = (Compoenent) => ({ error, ...otherProps }) => {
+  return (
+    <div>
+      {error ? <ErorrMessageComponent /> : <Compoenent {...otherProps} />}
+    </div>
   );
 };
 
