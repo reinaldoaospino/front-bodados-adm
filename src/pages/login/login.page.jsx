@@ -48,7 +48,7 @@ const LoginPage = ({ fetAutenticationStart, autenticationDenied }) => {
               value={user}
               text="Usuario"
               required={true}
-              handleChange={handleCHange}
+              onChange={handleCHange}
             />
           </InputWrap>
           <InputWrap>
@@ -58,7 +58,7 @@ const LoginPage = ({ fetAutenticationStart, autenticationDenied }) => {
               value={password}
               text="Contraseña"
               required={true}
-              handleChange={handleCHange}
+              onChange={handleCHange}
             />
           </InputWrap>
 

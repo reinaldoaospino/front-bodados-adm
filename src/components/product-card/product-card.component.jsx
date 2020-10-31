@@ -17,6 +17,7 @@ import { fetchDeleteProductStart, setActionComplete } from "../../redux/product/
 import { connect } from "react-redux";
 import { selectActionSucess } from "../../redux/product/product.selector";
 import { createStructuredSelector } from "reselect";
+import { useHistory } from "react-router-dom";
 
 const ProductCard = (props) => {
   const {
@@ -24,11 +25,12 @@ const ProductCard = (props) => {
     urlImage,
     ProductName,
     fetchDeleteProductStart,
-    setActionComplete
+    setActionComplete,
   } = props;
 
   const [openDialog, setOpenDialog] = useState(false);
-
+  const history = useHistory();
+  
   const handleClose = () => {
     setOpenDialog(false);
     setActionComplete(false);
@@ -59,7 +61,7 @@ const ProductCard = (props) => {
           </PriceWrap>
           <OptionsWrap>
             <ShopOptionWrap>
-              <CustomButton text="editar" />
+              <CustomButton text="editar" onClick={()=> history.push(`editar/${id}`)} />
             </ShopOptionWrap>
             <ShopOptionWrap>
               <CustomButton

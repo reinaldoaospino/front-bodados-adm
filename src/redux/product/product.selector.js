@@ -9,6 +9,12 @@ export const selectProductCollection = createSelector(
     product => product.productsCollection
 )
 
+export const selectProductById = (idProduct) => createSelector(
+    [selectProductCollection],
+    products => products ? products.find(p => p.id === idProduct) : null
+
+)
+
 export const selectIsFetching = createSelector(
     [selectProduct],
     product => product.isFetching

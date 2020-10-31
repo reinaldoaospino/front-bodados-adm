@@ -5,22 +5,21 @@ import { createStructuredSelector } from "reselect";
 import ProductWithSpinner from "../../../components/products/product-with-spinner";
 import { fetchGetProdutcStart } from "../../../redux/product/product.action";
 import { selectProductCollection } from "../../../redux/product/product.selector";
-
-
 import {
   ProductsUpdateContainer,
-  ProductsTitle
-} from "./products-update.styles";
+  ProductsTitle,
+} from "./products-administrar.styles";
 
-const ProductsUpdatePage = ({ productsCollection, fetchGetProdutcStart }) => {
+const ProductsAdministrarPage = ({ productsCollection, fetchGetProdutcStart,...rest }) => {
   useEffect(() => {
     fetchGetProdutcStart();
   }, [fetchGetProdutcStart]);
 
+
   return (
     <ProductsUpdateContainer>
       <ProductsTitle>Administración de Productos</ProductsTitle>
-      <ProductWithSpinner collection={productsCollection} />
+      <ProductWithSpinner collection={productsCollection} {...rest} />
     </ProductsUpdateContainer>
   );
 };
@@ -33,4 +32,4 @@ const mapDispatchToProps = (dispatch) => ({
   fetchGetProdutcStart: () => dispatch(fetchGetProdutcStart()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsUpdatePage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsAdministrarPage);
