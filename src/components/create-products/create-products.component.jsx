@@ -58,9 +58,10 @@ const CreateProductsComponent = (props) => {
     featuredProduct: "",
     category: "",
     imgFile: "",
+    description: ""
   });
 
-  const { productName, price, category } = productData;
+  const { productName, price, category,description } = productData;
 
   const disabled = isCreating;
 
@@ -84,6 +85,7 @@ const CreateProductsComponent = (props) => {
       featuredProduct: "",
       category: "",
       imgFile: "",
+      description: ""
     });
     document.getElementById("form-create").reset();
   };
@@ -193,13 +195,21 @@ const CreateProductsComponent = (props) => {
               label="Descripcion del producto"
               multiline
               rows={10}
+              name={"description"}
               variant="outlined"
+              required={true}
               fullWidth={true}
+              value={description}
+              onChange={handleCHange}
             />
           </InputWrap>
           <InputWrap>
             <p>Selecione imagen</p>
-            <CustomFileUpload loadFile={loadFile} disabled={disabled} />
+            <CustomFileUpload
+              loadFile={loadFile}
+              disabled={disabled}
+              required={true}
+            />
           </InputWrap>
           <ButtonWrap>
             <CustomButton text={"Aceptar"} disabled={disabled} />

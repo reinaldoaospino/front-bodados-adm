@@ -10,7 +10,8 @@ export const CreateProduct = async (productData) => {
         "Price": productData.price,
         "FeaturedProduct": productData.featuredProduct,
         "Category": productData.category,
-        "Imagen": productData.imgFile
+        "Imagen": productData.imgFile,
+        "Description": productData.description
     })
 
     var token = await tokenTask;
