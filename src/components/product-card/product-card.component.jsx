@@ -42,7 +42,7 @@ const ProductCard = (props) => {
     <div>
       <DialogMessageDeleteComponent
         open={openDialog}
-        text={`¿Deseas eliminar el producto ${ProductName}`}
+        text={`¿Deseas eliminar el producto ${ProductName}?`}
         handleYes={handleYesOption}
         handleCloseDialog={handleClose}
       />

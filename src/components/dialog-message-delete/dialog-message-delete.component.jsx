@@ -5,8 +5,13 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectActionComplete, selectActionSucess } from "../../redux/product/product.selector";
+import {
+  selectActionComplete,
+  selectActionSucess,
+  selectIsDeleting,
+} from "../../redux/product/product.selector";
 import { setActionComplete } from "../../redux/product/product.action";
+import { CircularProgress } from "@material-ui/core";
 
 const DialogMessageDeleteComponent = (props) => {
   const {
@@ -16,6 +21,7 @@ const DialogMessageDeleteComponent = (props) => {
     text,
     actionComplete,
     actionSuccess,
+    isDeleting,
   } = props;
 
   return (
@@ -28,15 +34,28 @@ const DialogMessageDeleteComponent = (props) => {
       >
         <DialogTitle id="alert-dialog-title">{text}</DialogTitle>
         <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary" autoFocus>
+          {isDeleting ? <CircularProgress /> : null}
+          <Button
+            disabled={isDeleting}
+            onClick={handleCloseDialog}
+            color="primary"
+            autoFocus
+          >
             Cancelar
           </Button>
-          <Button onClick={handleYes} color="primary" autoFocus>
+          <Button
+            disabled={isDeleting}
+            onClick={handleYes}
+            color="primary"
+            autoFocus
+          >
             Si
           </Button>
         </DialogActions>
         {!actionSuccess && actionComplete ? (
-          <span>Error en eliminar producto, intente más tarde</span>
+          <span style={{ fontSize: "1.1em", textAlign: "center" }}>
+            Error en eliminar producto, intente más tarde
+          </span>
         ) : null}
       </Dialog>
     </div>
@@ -46,6 +65,7 @@ const DialogMessageDeleteComponent = (props) => {
 const mapStateToProps = createStructuredSelector({
   actionSuccess: selectActionSucess,
   actionComplete: selectActionComplete,
+  isDeleting: selectIsDeleting,
 });
 
 const mapDispatchToProps = (dispatch) => ({
