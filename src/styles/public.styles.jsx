@@ -7,7 +7,14 @@ padding: 100px;
 grid-gap: 24px;
 `
 
-export const InputWrap = styled.div``;
+export const FormContainer = styled.form`
+  display: grid;
+  padding: 100px;
+  grid-gap: 24px;
+`;
+
+
+export const Divider = styled.div``;
 
 export const ButtonWrap = styled.div`
   display: grid;

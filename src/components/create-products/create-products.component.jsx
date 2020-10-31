@@ -3,7 +3,7 @@ import { FeatureProductQuestion } from "../../pages/login/login.styles";
 import DialogMessageComponent from "../dialog-message/dialog-message.component";
 import { CreateContainer } from "./create-products.styles";
 
-import { InputWrap, ButtonWrap } from "../../styles/public.styles";
+import { Divider, ButtonWrap } from "../../styles/public.styles";
 import {
   FormControl,
   FormControlLabel,
@@ -117,7 +117,7 @@ const CreateProductsComponent = (props) => {
       )}
       <form onSubmit={handleSubmit} id="form-create">
         <CreateContainer>
-          <InputWrap>
+          <Divider>
             <CustomInput
               name={"productName"}
               value={productName}
@@ -127,8 +127,8 @@ const CreateProductsComponent = (props) => {
               id={"productName"}
               disabled={disabled}
             />
-          </InputWrap>
-          <InputWrap>
+          </Divider>
+          <Divider>
             <CustomInput
               name={"price"}
               value={price}
@@ -139,8 +139,8 @@ const CreateProductsComponent = (props) => {
               disabled={disabled}
               type={"number"}
             />
-          </InputWrap>
-          <InputWrap>
+          </Divider>
+          <Divider>
             <FeatureProductQuestion>
               ¿Es producto principal?
             </FeatureProductQuestion>
@@ -169,8 +169,8 @@ const CreateProductsComponent = (props) => {
                 disabled={disabled}
               />
             </RadioGroup>
-          </InputWrap>
-          <InputWrap>
+          </Divider>
+          <Divider>
             <FormControl fullWidth={true}>
               <InputLabel>Categoria</InputLabel>
               <Select
@@ -185,8 +185,8 @@ const CreateProductsComponent = (props) => {
                 <MenuItem value={"Cakes"}>Cakes</MenuItem>
               </Select>
             </FormControl>
-          </InputWrap>
-          <InputWrap>
+          </Divider>
+          <Divider>
             <TextField
               id="standard-multiline-flexible"
               label="Descripcion del producto"
@@ -199,15 +199,15 @@ const CreateProductsComponent = (props) => {
               value={description}
               onChange={handleCHange}
             />
-          </InputWrap>
-          <InputWrap>
+          </Divider>
+          <Divider>
             <p>Selecione imagen</p>
             <CustomFileUpload
               loadFile={loadFile}
               disabled={disabled}
               required={true}
             />
-          </InputWrap>
+          </Divider>
           <ButtonWrap>
             <CustomButton text={"Aceptar"} disabled={disabled} />
             {isCreating ? <CircularProgress /> : null}
