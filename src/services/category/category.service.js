@@ -16,8 +16,8 @@ export const CreateCategory = async (categoryData) => {
             'Authorization': `Bearer ${token}`
         }
     })
-
-    return response.status;
+    
+    return response;
 }
 
 export const GetPCategory = async () => {

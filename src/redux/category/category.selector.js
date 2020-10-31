@@ -10,3 +10,8 @@ export const selectCategoryCollection = createSelector(
 )
 
 
+export const selectCategoryError = createSelector(
+    [selectCategory],
+    product => product.errorMessage
+)
+

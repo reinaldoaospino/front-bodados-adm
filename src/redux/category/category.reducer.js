@@ -18,22 +18,15 @@ const CategoryReducer = (state = INITIAL_STATE, action) => {
     case CategoryActionTypes.FETCH_CREATE_CATEGORY_START:
       return {
         ...state,
-        isCreating: true
       };
     case CategoryActionTypes.FETCH_CREATE_CATEGORY_SUCCESS:
       return {
         ...state,
-        isCreating: false,
-        actionSucess: true,
-        actionComplete: true
       };
     case CategoryActionTypes.FETCH_CREATE_CATEGORY_FAILURE:
       return {
         ...state,
-        isCreating: false,
-        errorMessage: action.payload,
-        actionFailure: true,
-        actionComplete: true
+        errorMessage: action.payload.response.data.ErrorCode === 2 ? 'Error en cargar, no se pueden cargar categorias ya existentes' : 'Fallo la carga de productos',
       };
 
     //GET

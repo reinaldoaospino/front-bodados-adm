@@ -17,7 +17,7 @@ const FetchingReducer = (state = INITIAL_STATE, action) => {
         case FetchingActionTypes.FETCHING_SUCCESS:
             return {
                 ...state,
-                fetchingSucess: action.payload
+                fetchingSuccess: action.payload
             }
 
         case FetchingActionTypes.FETCHING_COMPLETE:

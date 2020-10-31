@@ -7,7 +7,7 @@ export const setIsFetching = (value) => ({
     payload: value
 })
 
-export const setFetchingSucess= (value)=>({
+export const setFetchingSuccess= (value)=>({
     type: FetchingActionTypes.FETCHING_SUCCESS,
     payload: value
 })
