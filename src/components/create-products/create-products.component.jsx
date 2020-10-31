@@ -1,12 +1,9 @@
 import React from "react";
 import { FeatureProductQuestion } from "../../pages/login/login.styles";
 import DialogMessageComponent from "../dialog-message/dialog-message.component";
-import {
-  CreateContainer,
-  InputWrap,
-  ButtonWrap,
-} from "./create-products.styles";
+import { CreateContainer } from "./create-products.styles";
 
+import { InputWrap, ButtonWrap } from "../../styles/public.styles";
 import {
   FormControl,
   FormControlLabel,
@@ -58,10 +55,10 @@ const CreateProductsComponent = (props) => {
     featuredProduct: "",
     category: "",
     imgFile: "",
-    description: ""
+    description: "",
   });
 
-  const { productName, price, category,description } = productData;
+  const { productName, price, category, description } = productData;
 
   const disabled = isCreating;
 
@@ -85,7 +82,7 @@ const CreateProductsComponent = (props) => {
       featuredProduct: "",
       category: "",
       imgFile: "",
-      description: ""
+      description: "",
     });
     document.getElementById("form-create").reset();
   };
@@ -105,20 +102,20 @@ const CreateProductsComponent = (props) => {
 
   return (
     <div>
+      {actionSuccess ? (
+        <DialogMessageComponent
+          open={actionComplete}
+          text="Producto Creado Correctamente"
+          handleCloseDialog={handleCloseDialog}
+        />
+      ) : (
+        <DialogMessageComponent
+          open={actionComplete}
+          text="Fallo la carga de productos"
+          handleCloseDialog={handleCloseDialog}
+        />
+      )}
       <form onSubmit={handleSubmit} id="form-create">
-        {actionSuccess ? (
-          <DialogMessageComponent
-            open={actionComplete}
-            text="Producto Creado Correctamente"
-            handleCloseDialog={handleCloseDialog}
-          />
-        ) : (
-          <DialogMessageComponent
-            open={actionComplete}
-            text="Fallo la carga de productos"
-            handleCloseDialog={handleCloseDialog}
-          />
-        )}
         <CreateContainer>
           <InputWrap>
             <CustomInput
