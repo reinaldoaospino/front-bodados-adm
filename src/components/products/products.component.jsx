@@ -7,15 +7,17 @@ import { Pagination } from "@material-ui/lab";
 
 const ProductsComponent = ({ collection }) => {
   return (
-    <ProducstWrap>
+    <div>
       <CategoryButton />
-      {collection.map((p) => (
-        <ProducsPreviewComponent key={p.id} item={p} />
-      ))}
+      <ProducstWrap>
+        {collection.map((p) => (
+          <ProducsPreviewComponent key={p.id} item={p} />
+        ))}
+      </ProducstWrap>
       <PaginationWrap>
         <Pagination count={10} variant="outlined" />
       </PaginationWrap>
-    </ProducstWrap>
+    </div>
   );
 };
 
