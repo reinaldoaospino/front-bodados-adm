@@ -23,6 +23,7 @@ const ProductCard = (props) => {
   const {
     id,
     urlImage,
+    price,
     ProductName,
     fetchDeleteProductStart,
     setActionComplete,
@@ -57,7 +58,7 @@ const ProductCard = (props) => {
             <Description>{ProductName}</Description>
           </DescriptionWrap>
           <PriceWrap>
-            <Price>$ 100</Price>
+            <Price>{`${price}$`}</Price>
           </PriceWrap>
           <OptionsWrap>
             <ShopOptionWrap>

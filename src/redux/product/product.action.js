@@ -35,7 +35,7 @@ export const fetchGetProdutcFailure = (errorMessage) => ({
 
 //UPDATE
 
-export const fetcUpdateProdutcStart = (productData) => ({
+export const fetchUpdateProdutcStart = (productData) => ({
     type: ProductActionType.FETCH_UPDATE_PRODUCTS_START,
     payload: productData
 })

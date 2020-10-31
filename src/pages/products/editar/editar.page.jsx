@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { AppContainer } from "../../../App.styles";
 import EditProductComponent from "../../../components/edit-product/edit-product.component";
 import { selectProductById } from "../../../redux/product/product.selector";
+import { EditContainerPage } from "./editar.styles";
 
 const EditarProductPage = ({ product }) => {
   return (
-    <AppContainer>
+    <EditContainerPage>
       <EditProductComponent product={product} />
-    </AppContainer>
+    </EditContainerPage>
   );
 };
 

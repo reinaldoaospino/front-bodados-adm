@@ -5,7 +5,9 @@ import {
   ButtonWrap,
   EditContainer,
   FeatureProductQuestion,
-  InputWrap,
+  Divider,
+  ProductImg,
+  ImgWrap,
 } from "./edit-product.styles";
 
 import {
@@ -17,15 +19,31 @@ import {
   Select,
   Radio,
   CircularProgress,
+  TextField,
 } from "@material-ui/core";
 import CustomFileUpload from "../custom-file-upload/custom-file-upload.component";
 import CustomButton from "../custom-button/custom-button.component";
+import {
+  selectActionComplete,
+  selectActionFailure,
+  selectActionSucess,
+  selectIsUpdating,
+} from "../../redux/product/product.selector";
+import {
+  fetchUpdateProdutcStart,
+  setActionComplete,
+  setActionFailure,
+  setActionSuccess,
+} from "../../redux/product/product.action";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { Redirect, useHistory } from "react-router-dom";
 
 const EditProductComponent = (props) => {
   //Declarations
   const {
-    fetchCreateProductStart,
-    isCreating,
+    fetchUpdateProdutcStart,
+    isUpdating,
     actionSuccess,
     actionComplete,
     setActionComplete,
@@ -34,21 +52,43 @@ const EditProductComponent = (props) => {
   } = props;
 
   const [productData, setProductData] = useState({
-    productName: product.productName,
-    price: product.price,
-    featuredProduct: product.featuredProduct === "True" ? "Yes" : "No",
-    category: product.category,
-    imgFile: product.img,
+    idProduct: product ? product.id : null,
+    productName: product ? product.productName : null,
+    price: product ? product.price : null,
+    featuredProduct: product
+      ? product.featuredProduct === "True"
+        ? "Yes"
+        : "No"
+      : null,
+    category: product ? product.category : null,
+    imgFile: product ? product.imagen : null,
+    description: product ? product.description : null,
   });
 
-  const { productName, price, category, featuredProduct } = productData;
+  const history = useHistory();
 
-  const disabled = isCreating;
+  const [changeImg, setChangeImg] = useState("No");
+
+  const {
+    productName,
+    price,
+    category,
+    featuredProduct,
+    description,
+    imgFile,
+  } = productData;
+
+  const disabled = isUpdating;
 
   //Funtions
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchCreateProductStart(productData);
+    fetchUpdateProdutcStart(productData);
+  };
+
+  const handleImgChange = (event) => {
+    const { value } = event.target;
+    setChangeImg(value);
   };
 
   const handleCHange = (event) => {
@@ -59,14 +99,12 @@ const EditProductComponent = (props) => {
   const handleCloseDialog = () => {
     setActionSuccess(false);
     setActionComplete(false);
-    setProductData({
-      productName: "",
-      price: "",
-      featuredProduct: "",
-      category: "",
-      imgFile: "",
-    });
-    document.getElementById("form-create").reset();
+    history.push("/productos/administrar");
+  };
+
+  const handleCloseDialogNo = () => {
+    setActionSuccess(false);
+    setActionComplete(false);
   };
 
   const loadFile = (e) => {
@@ -82,24 +120,24 @@ const EditProductComponent = (props) => {
     };
   };
 
-  return (
+  return product ? (
     <div>
       <form onSubmit={handleSubmit} id="form-create">
         {actionSuccess ? (
           <DialogMessageComponent
             open={actionComplete}
-            text="Producto Creado Correctamente"
+            text="Producto actualizado Correctamente"
             handleCloseDialog={handleCloseDialog}
           />
         ) : (
           <DialogMessageComponent
             open={actionComplete}
-            text="Fallo la carga de productos"
-            handleCloseDialog={handleCloseDialog}
+            text="Fallo la actualización de productos"
+            handleCloseDialog={handleCloseDialogNo}
           />
         )}
         <EditContainer>
-          <InputWrap>
+          <Divider>
             <CustomInput
               name={"productName"}
               value={productName}
@@ -109,8 +147,8 @@ const EditProductComponent = (props) => {
               id={"productName"}
               disabled={disabled}
             />
-          </InputWrap>
-          <InputWrap>
+          </Divider>
+          <Divider>
             <CustomInput
               name={"price"}
               value={price}
@@ -121,8 +159,8 @@ const EditProductComponent = (props) => {
               disabled={disabled}
               type={"number"}
             />
-          </InputWrap>
-          <InputWrap>
+          </Divider>
+          <Divider>
             <FeatureProductQuestion>
               ¿Es producto principal?
             </FeatureProductQuestion>
@@ -151,8 +189,8 @@ const EditProductComponent = (props) => {
                 disabled={disabled}
               />
             </RadioGroup>
-          </InputWrap>
-          <InputWrap>
+          </Divider>
+          <Divider>
             <FormControl fullWidth={true}>
               <InputLabel>Categoria</InputLabel>
               <Select
@@ -167,19 +205,76 @@ const EditProductComponent = (props) => {
                 <MenuItem value={"Cakes"}>Cakes</MenuItem>
               </Select>
             </FormControl>
-          </InputWrap>
-          <InputWrap>
-            <p>Selecione imagen</p>
-            <CustomFileUpload loadFile={loadFile} disabled={disabled} />
-          </InputWrap>
+          </Divider>
+          <TextField
+            id="standard-multiline-flexible"
+            label="Descripcion del producto"
+            multiline
+            rows={10}
+            name={"description"}
+            variant="outlined"
+            required={true}
+            fullWidth={true}
+            value={description}
+            onChange={handleCHange}
+            disabled={disabled}
+          />
+          <ImgWrap>
+            <span>Imagen:</span>
+            <ProductImg src={`data:image/png;base64,${imgFile}`} />
+          </ImgWrap>
+          <Divider>
+            <FormControl fullWidth={true}>
+              <InputLabel>¿Deseas Cambiar de Imagen?</InputLabel>
+              <Select
+                onChange={handleImgChange}
+                name={"changeImg"}
+                value={changeImg}
+                disabled={disabled}
+              >
+                <MenuItem value={"Yes"}>Si</MenuItem>
+                <MenuItem value={"No"}>No</MenuItem>
+              </Select>
+            </FormControl>
+          </Divider>
+          {changeImg === "Yes" ? (
+            <Divider>
+              <p>Selecione imagen</p>
+              <CustomFileUpload
+                loadFile={loadFile}
+                disabled={disabled}
+                required={true}
+              />
+            </Divider>
+          ) : null}
           <ButtonWrap>
-            <CustomButton text={"Aceptar"} disabled={disabled} />
-            {isCreating ? <CircularProgress /> : null}
+            <CustomButton text={"Guardar Cambios"} disabled={disabled} />
+            {isUpdating ? <CircularProgress /> : null}
           </ButtonWrap>
         </EditContainer>
       </form>
     </div>
+  ) : (
+    <Redirect to="/productos/administrar" />
   );
 };
 
-export default EditProductComponent;
+const mapStateToProps = createStructuredSelector({
+  isUpdating: selectIsUpdating,
+  actionSuccess: selectActionSucess,
+  actionFailure: selectActionFailure,
+  actionComplete: selectActionComplete,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUpdateProdutcStart: (productData) =>
+    dispatch(fetchUpdateProdutcStart(productData)),
+  setActionSuccess: (value) => dispatch(setActionSuccess(value)),
+  setActionFailure: (value) => dispatch(setActionFailure(value)),
+  setActionComplete: (value) => dispatch(setActionComplete(value)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditProductComponent);

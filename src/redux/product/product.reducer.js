@@ -68,6 +68,7 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isUpdating: false,
+        actionSucess: true,
         actionComplete: true
       };
     case ProductActionTypes.FETCH_UPDATE_PRODUCTS_FAILURE:

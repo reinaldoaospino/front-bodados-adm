@@ -41,10 +41,13 @@ export const UpdateProducts = async (productData) => {
     var tokenTask = GetToken();
 
     const data = JSON.stringify({
+        "Id": productData.idProduct,
         "ProductName": productData.productName,
         "Price": productData.price,
-        "FeaturedProduct": productData.featuredProduct,
+        "FeaturedProduct": productData.featuredProduct === "Yes" ? "true": "false",
         "Category": productData.category,
+        "Imagen": productData.imgFile,
+        "Description": productData.description
     })
 
     var token = await tokenTask;
