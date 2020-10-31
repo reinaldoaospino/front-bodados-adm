@@ -1,12 +1,12 @@
 import React from "react";
-import { AppContainer } from "../../../App.styles";
 import CreateProductsComponent from "../../../components/create-products/create-products.component";
+import { CreateContainerPage } from "./products-create.styles";
 
 const ProductsCreatePage = () => {
   return (
-    <AppContainer>
+    <CreateContainerPage>
       <CreateProductsComponent />
-    </AppContainer>
+    </CreateContainerPage>
   );
 };
 

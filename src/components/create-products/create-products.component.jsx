@@ -16,6 +16,7 @@ import {
   Select,
   Radio,
   CircularProgress,
+  TextField,
 } from "@material-ui/core";
 
 import { useState } from "react";
@@ -41,7 +42,6 @@ import {
 } from "../../redux/product/product.selector";
 
 const CreateProductsComponent = (props) => {
-  
   //Declarations
   const {
     fetchCreateProductStart,
@@ -186,6 +186,16 @@ const CreateProductsComponent = (props) => {
                 <MenuItem value={"Cakes"}>Cakes</MenuItem>
               </Select>
             </FormControl>
+          </InputWrap>
+          <InputWrap>
+            <TextField
+              id="standard-multiline-flexible"
+              label="Descripcion del producto"
+              multiline
+              rows={10}
+              variant="outlined"
+              fullWidth={true}
+            />
           </InputWrap>
           <InputWrap>
             <p>Selecione imagen</p>
