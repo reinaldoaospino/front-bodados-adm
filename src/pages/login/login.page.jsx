@@ -66,7 +66,7 @@ const LoginPage = ({ fetAutenticationStart, autenticationDenied }) => {
             <CustomButton text="ingresar" />
           </ButtonWrap>
           <AccessDeniedMessage isDenied={autenticationDenied}>
-            User / password incorrect
+            Usuario y/o clave incorrecto
           </AccessDeniedMessage>
         </LoginWrap>
       </LoginForm>
