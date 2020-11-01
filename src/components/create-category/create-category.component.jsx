@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FormContainer, Divider, ButtonWrap } from "../../styles/public.styles";
 import CustomButton from "../custom-button/custom-button.component";
 import CustomInput from "../custom-input/custom-input.component";
@@ -34,6 +34,11 @@ const CreateCategoryComponent = (props) => {
   } = props;
 
   const { categoryName } = categoryData;
+
+  useEffect(() => {
+    setFetchingComplete(false);
+    setFetchingSuccess(false);
+  });
 
   //Funtions
   const handleSubmit = (event) => {

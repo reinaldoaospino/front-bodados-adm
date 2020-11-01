@@ -5,8 +5,6 @@ import { fetchCreateCategoryFailure, fetchGetCategoryFailure, fetchGetCategorySu
 import CategoryActionTypes from './category.types';
 
 
-
-
 export function* fetchCreateCategoryAsync({ payload }) {
     try {
         yield put(setIsFetching(true));
@@ -24,17 +22,13 @@ export function* fetchCreateCategoryAsync({ payload }) {
 
 export function* fetchGetCategoryAsync() {
     try {
-        yield put(setIsFetching(true));
+        yield feching();
         var categories = yield GetPCategory();
         yield put(fetchGetCategorySuccess(categories));
-        yield put(setFetchingSuccess(true));
-        yield put(setFetchingComplete(true));
-        yield put(setIsFetching(false));
+        yield fechingComplete();
     } catch (error) {
         yield put(fetchGetCategoryFailure(error))
-        yield put(setIsFetching(false));
-        yield put(setFetchingSuccess(false))
-        yield put(setFetchingComplete(true));
+        yield fechingFailure();
     }
 }
 
@@ -51,5 +45,22 @@ export function* fetchGetCategoryStart() {
 
 
 export function* categorySagas() {
-    yield all([call(fetchCreateCategoryStart),call(fetchGetCategoryStart)])
+    yield all([call(fetchCreateCategoryStart), call(fetchGetCategoryStart)])
+}
+
+
+function* feching() {
+    yield put(setIsFetching(true))
+}
+
+function* fechingComplete() {
+    yield put(setFetchingSuccess(true));
+    yield put(setFetchingComplete(true));
+    yield put(setIsFetching(false));
+}
+
+function* fechingFailure() {
+    yield put(setIsFetching(false));
+    yield put(setFetchingSuccess(false))
+    yield put(setFetchingComplete(true));
 }
