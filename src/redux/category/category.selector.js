@@ -6,7 +6,7 @@ const selectCategory = state => state.category;
 
 export const selectCategoryCollection = createSelector(
     [selectCategory],
-    product => product.productsCollection
+    product => product.categoryCollection
 )
 
 

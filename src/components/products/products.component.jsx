@@ -5,12 +5,16 @@ import { ProducstWrap, PaginationWrap } from "./products.styles";
 import CategoryButton from "../category-button/category-button.component";
 import { Pagination } from "@material-ui/lab";
 
-const ProductsComponent = ({ collection,...rest }) => {
+const ProductsComponent = ({
+  productsCollection,
+  categoriesCollection,
+  ...rest
+}) => {
   return (
     <div>
-      <CategoryButton />
+      <CategoryButton categoriesCollection={categoriesCollection} />
       <ProducstWrap>
-        {collection.map((p) => (
+        {productsCollection.map((p) => (
           <ProducsPreviewComponent key={p.id} item={p} {...rest} />
         ))}
       </ProducstWrap>

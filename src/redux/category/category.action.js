@@ -22,9 +22,9 @@ export const fetchGetCategoryStart = () => ({
     type: CategoryActionTypes.FETCH_GET_CATEGORY_START,
 })
 
-export const fetchGetCategorySuccess = (productsCollection) => ({
+export const fetchGetCategorySuccess = (categoriesCollection) => ({
     type: CategoryActionTypes.FETCH_GET_CATEGORY_SUCCESS,
-    payload: productsCollection
+    payload: categoriesCollection
 })
 
 export const fetchGetCategoryFailure = (errorMessage) => ({

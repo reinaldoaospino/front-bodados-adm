@@ -39,7 +39,7 @@ const CategoryReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        productsCollection: action.payload,
+        categoryCollection: action.payload,
         actionFailure: false
       };
     case CategoryActionTypes.FETCH_GET_CATEGORY_FAILURE:

@@ -3,6 +3,8 @@ import ProductActionTypes from './product.types';
 import { fetchCreateProdutcSuccess, fetchCreateProdutcFailure, fetchGetProdutcSuccess, fetchUpdateProdutcSuccess, fetchUpdateProdutcFailure, fetchDeleteProdutcSuccess, fetchDeleteProdutcFailure, fetchGetProdutcFailure } from './product.action'
 import { CreateProduct, GetProducts, UpdateProducts, DeleteProduct } from '../../services/product/product-service';
 import { fechingComplete } from '../helpers/fechingHelper';
+import { fetchGetCategorySuccess } from '../category/category.action';
+import { GetCategory } from '../../services/category/category.service';
 
 export function* fetchCreateAsync({ payload }) {
 
@@ -18,8 +20,10 @@ export function* fetchCreateAsync({ payload }) {
 export function* fetchGetAsync() {
 
     try {
-        var collection = yield GetProducts();
-        yield put(fetchGetProdutcSuccess(collection));
+        var products = yield GetProducts();
+        var categories = yield GetCategory();
+        yield put(fetchGetCategorySuccess(categories));
+        yield put(fetchGetProdutcSuccess(products));
         yield fechingComplete();
     } catch (error) {
         yield put(fetchGetProdutcFailure(error))
