@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 import {
-  selectActionFailure,
   selectIsFetching
 } from "../../redux/product/product.selector";
 import ProductsComponent from "./products.component";

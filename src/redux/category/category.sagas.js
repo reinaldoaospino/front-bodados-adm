@@ -1,7 +1,7 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import { CreateCategory, DeleteCategory, GetCategory, UpdateCategory } from '../../services/category/category.service';
 import { feching, fechingComplete, fechingFailure } from '../helpers/fechingHelper';
-import { fetchCreateCategoryFailure, fetchGetCategoryFailure, fetchGetCategorySuccess, fetchUpdateCategoryFailure, fetchUpdateCategorySuccess } from './category.action';
+import { fetchCreateCategoryFailure, fetchGetCategoryFailure, fetchGetCategorySuccess, fetchUpdateCategoryFailure } from './category.action';
 import CategoryActionTypes from './category.types';
 
 

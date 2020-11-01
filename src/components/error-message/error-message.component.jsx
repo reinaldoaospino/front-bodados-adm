@@ -5,7 +5,7 @@ import { ErrorMessage } from "./error-message.styles";
 const ErorrMessageComponent = () => (
   <AppContainer>
     <ErrorMessage>
-      Hubo un error en obtener los productos, intente más tarde
+      Hubo un error, intente más tarde.
     </ErrorMessage>
   </AppContainer>
 );
