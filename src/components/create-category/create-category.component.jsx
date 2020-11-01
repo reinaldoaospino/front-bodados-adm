@@ -38,7 +38,7 @@ const CreateCategoryComponent = (props) => {
   useEffect(() => {
     setFetchingComplete(false);
     setFetchingSuccess(false);
-  });
+  },[]);
 
   //Funtions
   const handleSubmit = (event) => {
