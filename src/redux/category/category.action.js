@@ -41,7 +41,7 @@ export const fetcUpdateCategoryStart = (productData) => ({
 })
 
 export const fetchUpdateCategorySuccess = () => ({
-    type: CategoryActionTypes.FETCH_UPDATE_CATEGORY_SUCCESS,
+    type: CategoryActionTypes.FETCH_UPDATE_CATEGORY_SUCCESS
 })
 
 export const fetchUpdateCategoryFailure = (errorMessage) => ({
@@ -50,7 +50,7 @@ export const fetchUpdateCategoryFailure = (errorMessage) => ({
 })
 
 //DELETE
-export const fetchDeleteCategoryStart = (id) => ({
+ export const fetchDeleteCategoryStart = (id) => ({
     type: CategoryActionTypes.FETCH_DELETE_CATEGORY_START,
     payload: id
 })

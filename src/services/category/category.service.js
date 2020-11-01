@@ -16,11 +16,11 @@ export const CreateCategory = async (categoryData) => {
             'Authorization': `Bearer ${token}`
         }
     })
-    
+
     return response;
 }
 
-export const GetPCategory = async () => {
+export const GetCategory = async () => {
     var token = await GetToken();
 
     const response = await bocadosApi.get(endPoint, {
@@ -32,10 +32,11 @@ export const GetPCategory = async () => {
     return response.data;
 }
 
-export const UpdatePCategory = async (categoryData) => {
+export const UpdateCategory = async (categoryData) => {
     var tokenTask = GetToken();
 
     const data = JSON.stringify({
+        "id": categoryData.id,
         "CategoryName": categoryData.categoryName
     })
 

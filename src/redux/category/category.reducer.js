@@ -54,8 +54,7 @@ const CategoryReducer = (state = INITIAL_STATE, action) => {
 
     case CategoryActionTypes.FETCH_UPDATE_CATEGORY_START:
       return {
-        ...state,
-        isUpdating: true
+        ...state
       };
     case CategoryActionTypes.FETCH_UPDATE_CATEGORY_SUCCESS:
       return {

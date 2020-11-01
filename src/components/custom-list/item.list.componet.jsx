@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { Button, Input, ListItem, ListItemText } from "@material-ui/core";
 import { ButtonWrap, CategoryFormWrap, InputWrap } from "./custom-list.styles";
-import { fetcUpdateCategoryStart } from "../../redux/category/category.action";
 import {
-  setFetchingComplete,
-  setFetchingSuccess,
-} from "../../redux/fetching/fetching.action";
-import {
-  selectIsFetching,
-  selectFetchingComplete,
-  selectFetchingSuccess,
-} from "../../redux/fetching/fetching.selector";
+  fetcUpdateCategoryStart,
+  fetchDeleteCategoryStart,
+} from "../../redux/category/category.action";
+import { selectIsFetching } from "../../redux/fetching/fetching.selector";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 
@@ -19,10 +14,8 @@ const ItemListComponet = (props) => {
   const {
     id,
     itemName,
-    isFetching,
-    fetchingSuccess,
-    fetchingComplete,
     fetchUpdateCategoryStart,
+    fetchDeleteCategoryStart,
   } = props;
 
   const [categoryData, setCategoryData] = useState({
@@ -47,6 +40,10 @@ const ItemListComponet = (props) => {
     fetchUpdateCategoryStart(categoryData);
   };
 
+  const handleDelete = () => {
+    fetchDeleteCategoryStart(categoryData.id);
+  };
+
   return (
     <div>
       {showInput ? (
@@ -61,7 +58,7 @@ const ItemListComponet = (props) => {
               onChange={handleChange}
             />
           </InputWrap>
-          <Options handleSave={handleSave} />
+          <Options handleSave={handleSave} handleDelete={handleDelete} />
         </CategoryFormWrap>
       ) : (
         <ListItem button>
@@ -76,17 +73,9 @@ const ItemListComponet = (props) => {
   );
 };
 
-const Options = ({
-  handleSave,
-  isFetching,
-  fetchingSuccess,
-  fetchingComplete,
-}) => {
-  const error = fetchingComplete && !fetchingSuccess;
-  const completeSucess = fetchingComplete && fetchingSuccess;
-
+const Options = ({ handleSave, isFetching, handleDelete }) => {
   return !isFetching ? (
-    <div>
+    <div style={{ display: "flex" }}>
       <ButtonWrap>
         <Button
           variant="contained"
@@ -100,30 +89,22 @@ const Options = ({
         <Button
           variant="contained"
           style={{ background: "rgb(197, 219, 116)", color: "white" }}
+          onClick={() => handleDelete()}
         >
           Eliminar
         </Button>
       </ButtonWrap>
     </div>
-  ) : (
-    <div>
-      {!isFetching ? <p>Cargando..</p> : null}
-      {error ? <p>Error en la carga</p> : null}
-      {completeSucess ? <p>Actuallizado correctamente</p> : null}
-    </div>
-  );
+  ) : null;
 };
 
 const mapStateToProps = createStructuredSelector({
   isFetching: selectIsFetching,
-  fetchingSuccess: selectFetchingSuccess,
-  fetchingComplete: selectFetchingComplete,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchUpdateCategoryStart: (data) => dispatch(fetcUpdateCategoryStart(data)),
-  setFetchingSuccess: (value) => dispatch(setFetchingSuccess(value)),
-  setFetchingComplete: (value) => dispatch(setFetchingComplete(value)),
+  fetchDeleteCategoryStart: (id) => dispatch(fetchDeleteCategoryStart(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemListComponet);
