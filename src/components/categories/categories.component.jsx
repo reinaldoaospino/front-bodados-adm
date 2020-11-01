@@ -3,9 +3,9 @@ import CustomListComponent from "../custom-list/custom-list.component";
 import { CategoriesContainer } from "./categories.styles";
 import exampleList from "./example-list.json";
 
-const CategoriesComponent = () => (
+const CategoriesComponent = ({collection}) => (
   <CategoriesContainer>
-    <CustomListComponent categories={exampleList} />
+    <CustomListComponent categories={collection} />
   </CategoriesContainer>
 );
 

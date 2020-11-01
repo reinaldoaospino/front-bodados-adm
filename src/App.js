@@ -8,7 +8,7 @@ import ProductsCreatePage from "./pages/products/create/products-create.page";
 import ProductsAdministrarPage from "./pages/products/administrar/products-administrar.page";
 import ProductsDeletePage from "./pages/products/delete/products-delete.page";
 import CategoriesCreatePage from "./pages/categories/create/categories-create.page";
-import CategoriesListPage from "./pages/categories/list/categories-list.page";
+import CategoriesAdministrarPage from "./pages/categories/administrar/categories-administrar.page";
 import EditarProductPage from "./pages/products/editar/editar.page";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
       {/* Categories */}
       <PrivateRoute component={CategoriesCreatePage} path="/categorias/crear" />
       <PrivateRoute
-        component={CategoriesListPage}
+        component={CategoriesAdministrarPage}
         path="/categorias/administrar"
       />
 

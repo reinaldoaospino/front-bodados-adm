@@ -7,10 +7,11 @@ import {
 } from "../../redux/product/product.selector";
 import ProductsComponent from "./products.component";
 import WithSpinnerGet from "../with-spinner/with-spinner.component";
+import { selectFetchingSuccess } from "../../redux/fetching/fetching.selector";
 
 const mapStateToProps = createStructuredSelector({
   isLoading: selectIsFetching,
-  actionFailure: selectActionFailure
+  actionSuccess: selectFetchingSuccess
 });
 
 const ProductWithSpinner = compose(

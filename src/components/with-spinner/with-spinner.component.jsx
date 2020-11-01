@@ -4,21 +4,21 @@ import ErorrMessageComponent from "../error-message/error-message.component";
 
 const WithSpinnerGet = (WrappedComponent) => ({
   isLoading,
-  actionFailure,
+  actionSuccess,
   ...otherProps
 }) => {
   const WithError = WithErrorMessage(WrappedComponent);
   return isLoading ? (
     <SpinnerComponent />
   ) : (
-    <WithError error={actionFailure} {...otherProps} />
+    <WithError success={actionSuccess} {...otherProps} />
   );
 };
  
-const WithErrorMessage = (Compoenent) => ({ error, ...otherProps }) => {
+const WithErrorMessage = (Compoenent) => ({ success, ...otherProps }) => {
   return (
     <div>
-      {error ? <ErorrMessageComponent /> : <Compoenent {...otherProps} />}
+      {!success ? <ErorrMessageComponent /> : <Compoenent {...otherProps} />}
     </div>
   );
 };
