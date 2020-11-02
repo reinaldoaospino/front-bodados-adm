@@ -8,14 +8,14 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 
-const CategoryButton = ({ categoriesCollection, categoryFilter }) => {
+const CategoryButton = ({ categoriesCollection, categoryFilter, setCategoryFilter }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
   const categoryClick = (option) => {
-    setAnchorEl(null);
+    setCategoryFilter(option);
   };
 
   const handleClose = () => {
@@ -39,7 +39,7 @@ const CategoryButton = ({ categoriesCollection, categoryFilter }) => {
         onClose={handleClose}
       >
         {categoriesCollection.map((c) => (
-          <MenuItem onClick={() => categoryClick()}>
+          <MenuItem onClick={() => categoryClick(c.categoryName)}>
             {
               categoryFilter === c.categoryName ?
                 <h1>c.categoryName</h1> :
@@ -52,8 +52,13 @@ const CategoryButton = ({ categoriesCollection, categoryFilter }) => {
   );
 };
 
-const mapDispatchToProps = createStructuredSelector({
+const mapStateToProps = createStructuredSelector({
   categoryFilter: selectCategoryFilter
 })
 
-export default connect(mapDispatchToProps)(CategoryButton);
+const mapDispatchToProps = (dispatch) => ({
+  setCategoryFilter: () => dispatch(setCategoryFilter())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryButton);
+
