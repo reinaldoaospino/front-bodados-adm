@@ -1,14 +1,24 @@
-import React from "react";
-import CreateProductsComponent from "../../../components/create-products/create-products.component";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import CreateProductWithSpinner from "../../../components/create-products/create-products-with-spinner";
+import { fetchGetCategoryStart } from "../../../redux/category/category.action";
 import { CreateContainerPage } from "./products-create.styles";
 
-const ProductsCreatePage = () => {
+const ProductsCreatePage = ({fetchGetCategoryStart}) => {
+  
+  useEffect(() => {
+    fetchGetCategoryStart();
+  }, [fetchGetCategoryStart]);
   return (
     <CreateContainerPage>
-      <CreateProductsComponent />
+      <CreateProductWithSpinner />
     </CreateContainerPage>
   );
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchGetCategoryStart: () => dispatch(fetchGetCategoryStart()),
+});
 
-export default ProductsCreatePage;
+
+export default connect(null,mapDispatchToProps)(ProductsCreatePage);

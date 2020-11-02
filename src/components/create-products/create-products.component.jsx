@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FeatureProductQuestion } from "../../pages/login/login.styles";
 import DialogMessageComponent from "../dialog-message/dialog-message.component";
 import { CreateContainer } from "./create-products.styles";
@@ -37,6 +37,7 @@ import {
   selectActionSucess,
   selectIsCreating,
 } from "../../redux/product/product.selector";
+import { selectCategoryCollection } from "../../redux/category/category.selector";
 
 const CreateProductsComponent = (props) => {
   //Declarations
@@ -47,6 +48,7 @@ const CreateProductsComponent = (props) => {
     actionComplete,
     setActionComplete,
     setActionSuccess,
+    categoriesCollection,
   } = props;
 
   const [productData, setProductData] = useState({
@@ -58,7 +60,13 @@ const CreateProductsComponent = (props) => {
     description: "",
   });
 
-  const { productName, price, category, description } = productData;
+  const {
+    productName,
+    price,
+    category,
+    description,
+    featuredProduct,
+  } = productData;
 
   const disabled = isCreating;
 
@@ -149,23 +157,23 @@ const CreateProductsComponent = (props) => {
               aria-label="position"
               name="position"
               defaultValue="top"
+              value={featuredProduct}
+              onChange={handleCHange}
             >
               <FormControlLabel
-                value={"true"}
+                value={"True"}
                 control={<Radio color="primary" required={true} />}
                 label="Si"
                 labelPlacement="start"
                 name={"featuredProduct"}
-                onChange={handleCHange}
                 disabled={disabled}
               />
               <FormControlLabel
-                value={"false"}
+                value={"False"}
                 control={<Radio color="primary" required={true} />}
                 label="No"
                 labelPlacement="start"
                 name={"featuredProduct"}
-                onChange={handleCHange}
                 disabled={disabled}
               />
             </RadioGroup>
@@ -180,9 +188,11 @@ const CreateProductsComponent = (props) => {
                 value={category}
                 disabled={disabled}
               >
-                <MenuItem value={"Dessert"}>Dessert</MenuItem>
-                <MenuItem value={"Cookies"}>Cookies</MenuItem>
-                <MenuItem value={"Cakes"}>Cakes</MenuItem>
+                {categoriesCollection.map((c) => (
+                  <MenuItem value={c.categoryName}>
+                    {c.categoryName.toUpperCase()}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Divider>
@@ -223,6 +233,7 @@ const mapStateToProps = createStructuredSelector({
   actionSuccess: selectActionSucess,
   actionFailure: selectActionFailure,
   actionComplete: selectActionComplete,
+  categoriesCollection: selectCategoryCollection,
 });
 
 const mapDispatchToProps = (dispatch) => ({

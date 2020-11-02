@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import ProductWithSpinner from "../../../components/products/product-with-spinner";
-import { selectCategoryCollection } from "../../../redux/category/category.selector";
+import { selectCategoryCollectionFilter } from "../../../redux/category/category.selector";
 import { fetchGetProdutcStart } from "../../../redux/product/product.action";
 import { selectProductCollection } from "../../../redux/product/product.selector";
 import {
@@ -36,7 +36,7 @@ const ProductsAdministrarPage = ({
 
 const mapStateToProps = createStructuredSelector({
   productsCollection: selectProductCollection,
-  categoriesCollection: selectCategoryCollection,
+  categoriesCollection: selectCategoryCollectionFilter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
