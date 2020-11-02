@@ -14,8 +14,8 @@ const ProductsComponent = ({
   ...rest
 }) => {
 
-  if(categoryFilter){
-    productsCollection.filter(p=>p.category === categoryFilter);
+  if (categoryFilter) {
+    productsCollection = productsCollection.filter(p => p.category === categoryFilter);
   }
 
   return (
