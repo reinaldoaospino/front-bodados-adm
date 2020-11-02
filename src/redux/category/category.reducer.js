@@ -9,7 +9,8 @@ const INITIAL_STATE = {
   actionFailure: false,
   isCreating: false,
   isUpdating: false,
-  isDeleting: false
+  isDeleting: false,
+  categoryFilter: undefined
 };
 
 const CategoryReducer = (state = INITIAL_STATE, action) => {
@@ -92,6 +93,13 @@ const CategoryReducer = (state = INITIAL_STATE, action) => {
         actionSucess: false,
         actionComplete: true
       };
+
+      //OTHERS
+      case CategoryActionTypes.SET_CATEGORY_FILTER:
+        return {
+          ...state,
+          categoryFilter: action.payload
+        };
 
     default:
       return state;
