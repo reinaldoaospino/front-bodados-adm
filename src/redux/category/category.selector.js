@@ -15,3 +15,8 @@ export const selectCategoryError = createSelector(
     product => product.errorMessage
 )
 
+export const selectCategoryFilter = createSelector(
+    [selectCategory],
+    product => product.categoryFilter
+)
+
