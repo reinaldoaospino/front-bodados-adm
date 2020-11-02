@@ -3,21 +3,11 @@ import { createSelector } from 'reselect';
 
 const selectCategory = state => state.category;
 
+const allObjet = { "id": 0, categoryName: "all" };
 
 export const selectCategoryCollection = createSelector(
     [selectCategory],
-    product =>{
-        
-        if(product.categoryCollection){
-            var allObjt = {"id": 0, categoryName: "all"}
-            var collection =  [allObjt,...product.categoryCollection]
-
-            return collection;
-        }
-
-        return null;
-       
-    } 
+    product => product.categoryCollection ? [allObjet, ...product.categoryCollection] : null
 )
 
 
