@@ -63,3 +63,10 @@ export const fetchDeleteCategoryFailure = (errorMessage) => ({
     type: CategoryActionTypes.FETCH_DELETE_CATEGORY_FAILURE,
     payload: errorMessage
 })
+
+
+//OTHERS
+export const setCategoryFilter = (category) => ({
+    type: CategoryActionTypes.SET_CATEGORY_FILTER,
+    payload: category
+})
