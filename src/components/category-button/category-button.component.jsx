@@ -2,13 +2,22 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import { CategoryButtonContainer } from "./category-button.styles";
+import {
+  CategoryButtonContainer,
+  NotSelectedCategory,
+  SelectedCategory,
+} from "./category-button.styles";
 import ListIcon from "@material-ui/icons/List";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { selectCategoryFilter } from "../../redux/category/category.selector";
+import { setCategoryFilter } from "../../redux/category/category.action";
 
-
-const CategoryButton = ({ categoriesCollection, categoryFilter, setCategoryFilter }) => {
+const CategoryButton = ({
+  categoriesCollection,
+  categoryFilter,
+  setCategoryFilter,
+}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -40,11 +49,11 @@ const CategoryButton = ({ categoriesCollection, categoryFilter, setCategoryFilte
       >
         {categoriesCollection.map((c) => (
           <MenuItem onClick={() => categoryClick(c.categoryName)}>
-            {
-              categoryFilter === c.categoryName ?
-                <h1>c.categoryName</h1> :
-                <p>c.CategoryName</p>
-            }
+            {categoryFilter === c.categoryName ? (
+              <SelectedCategory>{categoryFilter}</SelectedCategory>
+            ) : (
+              <NotSelectedCategory>{c.categoryName}</NotSelectedCategory>
+            )}
           </MenuItem>
         ))}
       </Menu>
@@ -53,12 +62,11 @@ const CategoryButton = ({ categoriesCollection, categoryFilter, setCategoryFilte
 };
 
 const mapStateToProps = createStructuredSelector({
-  categoryFilter: selectCategoryFilter
-})
+  categoryFilter: selectCategoryFilter,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  setCategoryFilter: () => dispatch(setCategoryFilter())
+  setCategoryFilter: (data) => dispatch(setCategoryFilter(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryButton);
-

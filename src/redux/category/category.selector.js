@@ -6,7 +6,18 @@ const selectCategory = state => state.category;
 
 export const selectCategoryCollection = createSelector(
     [selectCategory],
-    product => product.categoryCollection
+    product =>{
+        
+        if(product.categoryCollection){
+            var allObjt = {"id": 0, categoryName: "all"}
+            var collection =  [allObjt,...product.categoryCollection]
+
+            return collection;
+        }
+
+        return null;
+       
+    } 
 )
 
 

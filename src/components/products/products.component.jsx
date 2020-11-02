@@ -5,7 +5,7 @@ import CategoryButton from "../category-button/category-button.component";
 import { Pagination } from "@material-ui/lab";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-
+import { selectCategoryFilter } from "../../redux/category/category.selector";
 
 const ProductsComponent = ({
   productsCollection,
@@ -13,9 +13,13 @@ const ProductsComponent = ({
   categoryFilter,
   ...rest
 }) => {
-
   if (categoryFilter) {
-    productsCollection = productsCollection.filter(p => p.category === categoryFilter);
+    productsCollection =
+      categoryFilter.toLowerCase() === "all"
+        ? productsCollection
+        : productsCollection.filter(
+            (p) => p.category.toLowerCase() === categoryFilter.toLowerCase()
+          );
   }
 
   return (
@@ -34,7 +38,7 @@ const ProductsComponent = ({
 };
 
 const mapStateToProps = createStructuredSelector({
-  categoryFilter: selectCategoryFilter
-})
+  categoryFilter: selectCategoryFilter,
+});
 
 export default connect(mapStateToProps)(ProductsComponent);
