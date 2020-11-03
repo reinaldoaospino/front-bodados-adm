@@ -26,8 +26,9 @@ const ProductsComponent = ({
           );
   }
 
-  const [produtcsAux, setProdutcsAux] = useState(productsCollection);
+  const [produtcsAux, setProdutcsAux] = useState(productsCollection.slice(0,maxItem));
 
+  ;
   const handlePaginationChange = (event, value) => {
     var max = value * maxItem;
     var min = max - maxItem;
