@@ -52,3 +52,7 @@ export const selectIsDeleting = createSelector(
     product => product.isDeleting
 )
 
+export const selectProductErrorMessage = createSelector(
+    [selectProduct],
+    product => product.errorMessage
+)

@@ -22,7 +22,7 @@ export const CreateProduct = async (productData) => {
         }
     })
 
-    return response.status;
+    return response;
 }
 
 export const GetProducts = async () => {

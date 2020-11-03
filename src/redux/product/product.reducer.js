@@ -31,7 +31,7 @@ const ProductReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isCreating: false,
-        errorMessage: action.payload,
+        errorMessage: action.payload.response.data.ErrorCode === 2 ? 'Error en cargar, ya existen 6 productos cargados como principales' : 'Fallo la carga de productos',
         actionFailure: true,
         actionComplete: true
       };

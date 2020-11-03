@@ -36,6 +36,7 @@ import {
   selectActionFailure,
   selectActionSucess,
   selectIsCreating,
+  selectProductErrorMessage,
 } from "../../redux/product/product.selector";
 import { selectCategoryCollection } from "../../redux/category/category.selector";
 
@@ -49,6 +50,7 @@ const CreateProductsComponent = (props) => {
     setActionComplete,
     setActionSuccess,
     categoriesCollection,
+    errrorMessage
   } = props;
 
   const [productData, setProductData] = useState({
@@ -119,7 +121,7 @@ const CreateProductsComponent = (props) => {
       ) : (
         <DialogMessageComponent
           open={actionComplete}
-          text="Fallo la carga de productos"
+          text={errrorMessage}
           handleCloseDialog={handleCloseDialog}
         />
       )}
@@ -234,6 +236,7 @@ const mapStateToProps = createStructuredSelector({
   actionFailure: selectActionFailure,
   actionComplete: selectActionComplete,
   categoriesCollection: selectCategoryCollection,
+  errrorMessage: selectProductErrorMessage
 });
 
 const mapDispatchToProps = (dispatch) => ({
