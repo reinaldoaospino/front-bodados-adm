@@ -6,6 +6,7 @@ import { Pagination } from "@material-ui/lab";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCategoryFilter } from "../../redux/category/category.selector";
+import { useState } from "react";
 
 const ProductsComponent = ({
   productsCollection,
@@ -13,14 +14,24 @@ const ProductsComponent = ({
   categoryFilter,
   ...rest
 }) => {
+  const [page, setPage] = useState(1);
+  const [maxItem, setMaxItem] = useState(5);
+
   if (categoryFilter) {
     productsCollection =
       categoryFilter.toLowerCase() === "all"
         ? productsCollection
         : productsCollection.filter(
-            (p) => p.category.toLowerCase() === categoryFilter.toLowerCase()
-          );
+          (p) => p.category.toLowerCase() === categoryFilter.toLowerCase()
+        );
   }
+
+  const handlePaginationChange = (event, value) => {
+    var max = page * maxItem;
+    var min = max - maximo;
+    productsCollection = productsCollection.slice(min,max);
+    setPage(value);
+  };
 
   return (
     <div>
@@ -31,7 +42,7 @@ const ProductsComponent = ({
         ))}
       </ProducstWrap>
       <PaginationWrap>
-        <Pagination count={10} variant="outlined" />
+        <Pagination count={10} page={page} variant="outlined" onChange={handlePaginationChange} />
       </PaginationWrap>
     </div>
   );
