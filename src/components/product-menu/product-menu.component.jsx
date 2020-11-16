@@ -41,7 +41,7 @@ const ProductMenuComponent = (props) => {
           <MenuItem onClick={handleClose}>Crear</MenuItem>
         </Link>
         <Link to="/productos/administrar" style={LinkStyles}>
-          <MenuItem onClick={handleClose}>Listar Productos</MenuItem>
+          <MenuItem onClick={handleClose}>Lista de productos</MenuItem>
         </Link>
       </Menu>
     </div>

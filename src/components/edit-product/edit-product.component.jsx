@@ -38,6 +38,7 @@ import {
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Redirect, useHistory } from "react-router-dom";
+import { selectCategoryCollection } from "../../redux/category/category.selector";
 
 const EditProductComponent = (props) => {
   //Declarations
@@ -49,6 +50,7 @@ const EditProductComponent = (props) => {
     setActionComplete,
     setActionSuccess,
     product,
+    categoriesCollection,
   } = props;
 
   const [productData, setProductData] = useState({
@@ -200,9 +202,11 @@ const EditProductComponent = (props) => {
                 value={category}
                 disabled={disabled}
               >
-                <MenuItem value={"Dessert"}>Dessert</MenuItem>
-                <MenuItem value={"Cookies"}>Cookies</MenuItem>
-                <MenuItem value={"Cakes"}>Cakes</MenuItem>
+                {categoriesCollection.map((c) => (
+                  <MenuItem value={c.categoryName}>
+                    {c.categoryName.toUpperCase()}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Divider>
@@ -260,6 +264,7 @@ const EditProductComponent = (props) => {
 };
 
 const mapStateToProps = createStructuredSelector({
+  categoriesCollection: selectCategoryCollection,
   isUpdating: selectIsUpdating,
   actionSuccess: selectActionSucess,
   actionFailure: selectActionFailure,

@@ -15,7 +15,7 @@ const ProductsComponent = ({
   ...rest
 }) => {
   const [page, setPage] = useState(1);
-  const [maxItem, setMaxItem] = useState(3);
+  const [maxItem, setMaxItem] = useState(12);
 
   if (categoryFilter) {
     productsCollection =
@@ -26,9 +26,10 @@ const ProductsComponent = ({
           );
   }
 
-  const [produtcsAux, setProdutcsAux] = useState(productsCollection.slice(0,maxItem));
+  const [produtcsAux, setProdutcsAux] = useState(
+    productsCollection.slice(0, maxItem)
+  );
 
-  
   const handlePaginationChange = (event, value) => {
     var max = value * maxItem;
     var min = max - maxItem;
@@ -48,7 +49,7 @@ const ProductsComponent = ({
       </ProducstWrap>
       <PaginationWrap>
         <Pagination
-          count={(Math.ceil(productsCollection.length / 5)) +1}
+          count={Math.ceil(productsCollection.length / 5) + 1}
           page={page}
           variant="outlined"
           onChange={handlePaginationChange}

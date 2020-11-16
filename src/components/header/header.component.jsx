@@ -8,7 +8,6 @@ import {
   Logo,
 } from "./header.styles";
 import LogoHeader from "../../assets/logoHeader.svg";
-
 import { Link } from "react-router-dom";
 import ProductMenuComponent from "../product-menu/product-menu.component";
 import CategoryMenuComponent from "../category-menu/category-menu.component";
