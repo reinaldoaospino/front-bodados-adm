@@ -14,9 +14,6 @@ const ProductsComponent = ({
   categoryFilter,
   ...rest
 }) => {
-  const [page, setPage] = useState(1);
-  const [maxItem, setMaxItem] = useState(12);
-
   if (categoryFilter) {
     productsCollection =
       categoryFilter.toLowerCase() === "all"
@@ -26,35 +23,14 @@ const ProductsComponent = ({
           );
   }
 
-  const [produtcsAux, setProdutcsAux] = useState(
-    productsCollection.slice(0, maxItem)
-  );
-
-  const handlePaginationChange = (event, value) => {
-    var max = value * maxItem;
-    var min = max - maxItem;
-    var sliceProducts = productsCollection.slice(min, max);
-
-    setProdutcsAux(sliceProducts);
-    setPage(value);
-  };
-
   return (
     <div>
       <CategoryButton categoriesCollection={categoriesCollection} />
       <ProducstWrap>
-        {produtcsAux.map((p) => (
+        {productsCollection.map((p) => (
           <ProducsPreviewComponent key={p.id} item={p} {...rest} />
         ))}
       </ProducstWrap>
-      <PaginationWrap>
-        <Pagination
-          count={Math.ceil(productsCollection.length / 5) + 1}
-          page={page}
-          variant="outlined"
-          onChange={handlePaginationChange}
-        />
-      </PaginationWrap>
     </div>
   );
 };
